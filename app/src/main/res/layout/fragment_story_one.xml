@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="450dp"
+    android:layout_marginLeft="450dp"
+    android:layout_height="fill_parent"
+    android:background="#d3d3d3"
+    android:id="@+id/scrollView"
+    android:visibility="visible"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/exit_button"
+            android:background="@drawable/exit"
+            android:padding="10dp"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="340dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/exit_button"
+            android:id="@+id/erase_button"
+            android:background="@drawable/erase"
+            />
+
+        <EditText
+            android:textStyle="bold"
+            android:hint="New Title"
+            android:id="@+id/new_title_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/exit_button"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/brief_synopsis"
+            android:id="@+id/synopsis_id"
+            android:layout_alignTop="@id/new_title_edit_text"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="70dp" />
+        <EditText
+            android:id="@+id/synopsis_edit_text"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/synopsis_id"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            />
+        <TextView android:text="@string/select_genre"
+            android:id="@+id/select_genre_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/synopsis_id"
+            android:layout_marginTop="150dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            />
+
+        <TextView android:id="@+id/action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/select_genre_text"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:background="@drawable/action"
+            android:tag="1"
+            android:onClick="onClick"
+            />
+        <TextView android:id="@+id/bio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/action_button"
+            android:layout_alignLeft="@+id/action_button"
+            android:layout_marginLeft="90dp"
+            android:background="@drawable/bio"
+            android:tag="1"
+            android:onClick="onClick"
+            />
+        <TextView android:id="@+id/comedy_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/bio_button"
+            android:layout_alignLeft="@+id/bio_button"
+            android:layout_marginLeft="90dp"
+            android:background="@drawable/humor"
+            android:tag="1"
+            android:onClick="onClick"
+            />
+        <TextView android:id="@+id/drama_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/comedy_button"
+            android:layout_alignLeft="@+id/comedy_button"
+            android:layout_marginLeft="90dp"
+            android:background="@drawable/drama"
+            android:tag="1"
+            android:onClick="onClick"
+            />
+
+        <TextView android:id="@+id/fantasy_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/action_button"
+            android:layout_marginTop="110dp"
+            android:layout_marginLeft="110dp"
+            android:background="@drawable/fantasy"
+            android:tag="1"
+            android:onClick="onClick"
+            />
+        <TextView android:id="@+id/horror_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fantasy_button"
+            android:layout_alignLeft="@+id/fantasy_button"
+            android:layout_marginLeft="90dp"
+            android:background="@drawable/horror"
+            android:tag="1"
+            android:onClick="onClick"
+            />
+        <TextView android:id="@+id/history_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/horror_button"
+            android:layout_alignLeft="@+id/horror_button"
+            android:layout_marginLeft="90dp"
+            android:background="@drawable/history"
+            android:tag="1"
+            android:onClick="onClick"
+            />
+
+        <TextView android:id="@+id/mystery_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fantasy_button"
+            android:layout_marginTop="110dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:background="@drawable/mystery"
+            android:tag="1"
+            android:onClick="onClick"
+            />
+        <TextView android:id="@+id/romance_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/mystery_button"
+            android:layout_alignLeft="@+id/mystery_button"
+            android:layout_marginLeft="90dp"
+            android:background="@drawable/romance"
+            android:tag="1"
+            android:onClick="onClick"
+            />
+        <TextView android:id="@+id/scifi_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/romance_button"
+            android:layout_alignLeft="@+id/romance_button"
+            android:layout_marginLeft="90dp"
+            android:background="@drawable/scifi"
+            android:tag="1"
+            android:onClick="onClick"
+            />
+        <TextView android:id="@+id/thriller_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/scifi_button"
+            android:layout_alignLeft="@+id/scifi_button"
+            android:layout_marginLeft="90dp"
+            android:background="@drawable/thriller"
+            android:tag="1"
+            android:onClick="onClick"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/action_button"
+            android:layout_marginTop="80dp"
+            android:layout_alignLeft="@id/action_button"
+            android:layout_alignRight="@id/action_button"
+            android:gravity="center"
+            android:id="@+id/action_label"
+            android:text="@string/action"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/bio_button"
+            android:layout_marginTop="80dp"
+            android:layout_alignLeft="@id/bio_button"
+            android:layout_alignRight="@id/bio_button"
+            android:gravity="center"
+            android:id="@+id/bio_label"
+            android:text="@string/bio"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/comedy_button"
+            android:layout_marginTop="80dp"
+            android:layout_alignLeft="@id/comedy_button"
+            android:layout_alignRight="@id/comedy_button"
+            android:gravity="center"
+            android:id="@+id/comedy_label"
+            android:text="@string/comedy"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/drama_button"
+            android:layout_marginTop="80dp"
+            android:layout_alignLeft="@id/drama_button"
+            android:layout_alignRight="@id/drama_button"
+            android:gravity="center"
+            android:id="@+id/drama_label"
+            android:text="@string/drama"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/fantasy_button"
+            android:layout_marginTop="80dp"
+            android:layout_alignLeft="@id/fantasy_button"
+            android:layout_alignRight="@id/fantasy_button"
+            android:gravity="center"
+            android:id="@+id/fantasy_label"
+            android:text="@string/fantasy"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/horror_button"
+            android:layout_marginTop="80dp"
+            android:layout_alignLeft="@id/horror_button"
+            android:layout_alignRight="@id/horror_button"
+            android:gravity="center"
+            android:id="@+id/horror_label"
+            android:text="@string/horror"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/history_button"
+            android:layout_marginTop="80dp"
+            android:layout_alignLeft="@id/history_button"
+            android:layout_alignRight="@id/history_button"
+            android:gravity="center"
+            android:id="@+id/history_label"
+            android:text="@string/history"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/mystery_button"
+            android:layout_marginTop="80dp"
+            android:layout_alignLeft="@id/mystery_button"
+            android:layout_alignRight="@id/mystery_button"
+            android:gravity="center"
+            android:id="@+id/mystery_label"
+            android:text="@string/mystery"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/romance_button"
+            android:layout_marginTop="80dp"
+            android:layout_alignLeft="@id/romance_button"
+            android:layout_alignRight="@id/romance_button"
+            android:gravity="center"
+            android:id="@+id/romance_label"
+            android:text="@string/romance"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/scifi_button"
+            android:layout_marginTop="80dp"
+            android:layout_alignLeft="@id/scifi_button"
+            android:layout_alignRight="@id/scifi_button"
+            android:gravity="center"
+            android:id="@+id/scifi_label"
+            android:text="@string/scifi"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/thriller_button"
+            android:layout_marginTop="80dp"
+            android:layout_alignLeft="@id/thriller_button"
+            android:layout_alignRight="@id/thriller_button"
+            android:gravity="center"
+            android:id="@+id/thriller_label"
+            android:text="@string/thriller"
+            />
+
+        <TextView android:text="@string/other_info"
+            android:id="@+id/other_info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/mystery_button"
+            android:layout_marginTop="120dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            />
+        <TextView android:text="@string/age_range"
+            android:textStyle="bold"
+            android:id="@+id/age_range_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/other_info_text"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/age_radio_group"
+            android:layout_alignTop="@+id/age_range_text"
+            android:layout_toRightOf="@+id/age_range_text"
+            android:layout_toEndOf="@+id/age_range_text"
+            android:layout_marginLeft="20dp">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/age_children"
+                android:id="@+id/age_radioButton" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/age_young_adult"
+                android:id="@+id/age_radioButton2" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/age_adult"
+                android:id="@+id/age_radioButton3" />
+        </RadioGroup>
+
+        <TextView android:text="@string/classification_text"
+            android:textStyle="bold"
+            android:id="@+id/classification_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/age_radio_group"
+            android:layout_marginTop="110dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/classification_text"
+            android:id="@+id/classification_radio_group"
+            android:layout_toRightOf="@+id/classification_text"
+            android:layout_toEndOf="@+id/classification_text">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/classification_fiction"
+                android:id="@+id/classification_radioButton" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/classification_non_fiction"
+                android:id="@+id/classification_radioButton2"
+                android:layout_marginBottom="30dp"/>
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/storySaveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/classification_radio_group"
+            android:text="Save and Continue"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+    </RelativeLayout>
+
+</ScrollView>

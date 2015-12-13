@@ -28,7 +28,7 @@ import java.lang.ref.SoftReference;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class StoryBase extends AppCompatActivity {
 
 
     DBHandler appDB;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_story_base);
 
         appDB = DBHandler.getInstance(this);
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         if (findViewById(R.id.story_fragment_id) != null) {
             Bundle bundle = new Bundle();
             bundle.putString("titleKey","");
-            StoryFragment storyFragment = new StoryFragment();
+            StoryFragmentOne storyFragment = new StoryFragmentOne();
             storyFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.story_fragment_id, storyFragment).commit();
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
 
-                Intent intent = new Intent(getBaseContext(), CharacterActivity.class);
+                Intent intent = new Intent(getBaseContext(), CharacterBase.class);
                 startActivity(intent);
 
                 /* Code for Edit Button
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 if (findViewById(R.id.story_fragment_id) != null) {
                     Bundle bundle = new Bundle();
                     bundle.putString("titleKey","");
-                    StoryFragment newFrag = new StoryFragment();
+                    StoryFragmentOne newFrag = new StoryFragmentOne();
                     newFrag.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.story_fragment_id, newFrag).commit();
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_story_base, menu);
         return true;
     }
 

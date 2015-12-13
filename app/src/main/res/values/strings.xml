@@ -108,5 +108,9 @@
     <string name="page_three_item_24">Swimming</string>
     <string name="page_three_item_25">Gaming</string>
     <string name="title_activity_character">CharacterActivity</string>
+    <string name="title_activity_story_fragment_one">StoryFragmentOne</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_character_base">CharacterBase</string>
 
 </resources>
