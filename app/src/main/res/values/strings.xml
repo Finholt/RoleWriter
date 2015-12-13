@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StoryBook</string>
+    <string name="app_name">RoleWriter</string>
 
     <string name="story_screen_title">My Stories</string>
     <string name="new_story">New Title</string>
