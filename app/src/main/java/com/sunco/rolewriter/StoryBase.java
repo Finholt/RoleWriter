@@ -63,81 +63,22 @@ public class StoryBase extends AppCompatActivity {
 
         if (findViewById(R.id.story_fragment_id) != null) {
             Bundle bundle = new Bundle();
-            bundle.putString("titleKey","");
+            bundle.putString("titleKey", "");
             StoryFragmentOne storyFragment = new StoryFragmentOne();
             storyFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.story_fragment_id, storyFragment).commit();
         }
 
+        findViewById(R.id.story_list_id).setVisibility(View.VISIBLE);
 
-        populateListView();
-        registerClickCallback();
-    }
-
-    private void populateListView() {
-
-        List<StoryClass> storyList = appDB.getAllStories();
-        int storyCount = appDB.getStoryCount();
-        //String[] stories = {"Wicked", "Cyborg Book", "Harry Potter"};
-        stories = new String[storyCount];
-
-        int i = 0;
-        for (StoryClass s : storyList){
-            stories[i] = s.getTitle();
-            i++;
+        if (findViewById(R.id.story_list_id) != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("titleKey", "");
+            StoryList storyListFragment = new StoryList();
+            storyListFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().add(R.id.story_list_id, storyListFragment).commit();
         }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.story_items, stories);
-
-        ListView list = (ListView) findViewById(R.id.storyList);
-        list.setAdapter(adapter);
-    }
-
-    private void registerClickCallback() {
-        ListView list = (ListView) findViewById(R.id.storyList);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-
-                Intent intent = new Intent(getBaseContext(), CharacterBase.class);
-                startActivity(intent);
-
-                /* Code for Edit Button
-                if (findViewById(R.id.story_fragment_id).getVisibility() == View.INVISIBLE) {
-                    findViewById(R.id.story_fragment_id).setVisibility(View.VISIBLE);
-                }
-
-                TextView textView = (TextView) viewClicked;
-
-                String ageG = "2131492993";
-                String classi = "2131492998";
-                String genre ="";
-
-                List<StoryClass> storyList = appDB.getAllStories();
-                for (StoryClass s : storyList) {
-                    String storyT = s.getTitle();
-                    if (textView.getText().toString().equalsIgnoreCase(storyT)) {
-                        ageG = s.getAge();
-                        classi = s.getClassi();
-                        genre = s.getGenre();
-                    }
-                }
-
-                if (findViewById(R.id.story_fragment_id) != null) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("titleKey", textView.getText().toString());
-                    bundle.putString("ageKey", ageG);
-                    bundle.putString("classiKey", classi);
-                    bundle.putString("genreKey", genre);
-                    StoryFragment oldFrag = new StoryFragment();
-                    oldFrag.setArguments(bundle);
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.story_fragment_id, oldFrag).commit();
-                }*/
-
-            }
-        });
     }
 
     public void onClick(View v)
@@ -192,11 +133,5 @@ public class StoryBase extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-
-    public void closeEditor(View view)
-    {
-        findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
     }
 }
