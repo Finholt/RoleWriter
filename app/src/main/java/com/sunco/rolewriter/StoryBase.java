@@ -80,7 +80,7 @@ public class StoryBase extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.story_list_id, storyListFragment).commit();
         }
 
-        registerClickCallback();
+        //registerClickCallback();
     }
 
     private void registerClickCallback() {
@@ -175,5 +175,12 @@ public class StoryBase extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void OpenCharacters(View view) {
+        Toast.makeText(getApplicationContext(), "You called?",
+                Toast.LENGTH_LONG).show();
+        //Intent intent = new Intent(this, CharacterBase.class);
+        //startActivity(intent);
     }
 }

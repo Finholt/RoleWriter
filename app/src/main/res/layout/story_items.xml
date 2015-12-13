@@ -11,6 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
+        android:onClick="OpenCharacters"
         android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
         android:id="@+id/story_name"/>
