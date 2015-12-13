@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_no_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:background="#D8E2E7">
+
+
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/header_image"
+        android:id="@+id/header"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/XLargeText"
+        android:text="My Stories"
+        android:textStyle="bold"
+        android:id="@+id/storyTitle"
+        android:textColor="#ffffff"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/AddButton"
+        android:layout_toEndOf="@+id/AddButton"
+        android:layout_alignBottom="@+id/header" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/add"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_alignTop="@+id/storyTitle"
+        android:id="@+id/AddButton"
+        android:onClick="onClick"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Story"
+        android:id="@+id/newStory"
+        android:textColor="#939598"
+        android:textSize="18sp"
+        android:layout_below="@+id/storyTitle"
+        android:layout_alignTop="@+id/AddButton"
+        android:layout_alignBottom="@+id/AddButton"
+        android:gravity="bottom"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toRightOf="@+id/AddButton"
+        android:layout_toEndOf="@+id/AddButton" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/newStory"
+        android:background="#939598"
+        android:layout_marginTop="10dp"
+        android:id="@+id/dividerLine"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="1dip"
+        android:id="@+id/storyList"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/dividerLine"/>
+
+    <!--<fragment
+        android:layout_width="450dp"
+        android:layout_height="match_parent"
+        android:name="com.example.wesley.gravyt8erots.StoryFragment"
+        android:id="@+id/story_fragment_id"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        tools:layout="@layout/story_fragment" /> -->
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:id="@+id/story_fragment_id"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
