@@ -1,11 +1,13 @@
 package com.sunco.rolewriter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -16,6 +18,10 @@ public class CharacterBase extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_base);
 
+        Intent PassedValues = getIntent();
+        String StoryName = PassedValues.getStringExtra("StoryName");
+        Toast.makeText(getApplicationContext(), StoryName,
+                Toast.LENGTH_LONG).show();
 
         if (findViewById(R.id.story_fragment_id) != null) {
             Bundle bundle = new Bundle();
@@ -41,9 +47,9 @@ public class CharacterBase extends AppCompatActivity {
             i++;
         }*/
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.story_items, characters);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.story_items, characters);
 
-        ListView list = (ListView) findViewById(R.id.storyList);
-        list.setAdapter(adapter);
+        //ListView list = (ListView) findViewById(R.id.storyList);
+        //list.setAdapter(adapter);
     }
 }

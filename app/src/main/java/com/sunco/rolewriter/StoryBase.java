@@ -24,6 +24,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.lang.ref.SoftReference;
 import java.util.Arrays;
 import java.util.List;
@@ -178,9 +180,11 @@ public class StoryBase extends AppCompatActivity {
     }
 
     public void OpenCharacters(View view) {
-        Toast.makeText(getApplicationContext(), "You called?",
-                Toast.LENGTH_LONG).show();
-        //Intent intent = new Intent(this, CharacterBase.class);
-        //startActivity(intent);
+        TextView text = (TextView) view;
+        Intent intent = new Intent(this, CharacterBase.class);
+
+        intent.putExtra("StoryName", text.getText());
+
+        startActivity(intent);
     }
 }
