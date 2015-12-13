@@ -13,11 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.app.FragmentManager;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +35,7 @@ public class StoryFragmentOne extends Fragment {
     RadioButton ageBtn;
     RadioGroup classiGroup;
     RadioButton classiBtn;
+    FrameLayout listFrag;
     DBHandler appDB = DBHandler.getInstance(getContext());
     String[] stories;
 
@@ -43,12 +46,15 @@ public class StoryFragmentOne extends Fragment {
 
         final View storyview = inflater.inflate(R.layout.fragment_story_one,
                 container, false);
+        final View baseview = inflater.inflate(R.layout.activity_story_base,
+                container, false);
 
         storyTitle = (EditText) storyview.findViewById(R.id.new_title_edit_text);
         saveBtn = (Button) storyview.findViewById(R.id.storySaveBtn);
         storyTitle = (EditText) storyview.findViewById(R.id.new_title_edit_text);
         ageGroup = (RadioGroup) storyview.findViewById(R.id.age_radio_group);
         classiGroup = (RadioGroup) storyview.findViewById(R.id.classification_radio_group);
+        listFrag = (FrameLayout) baseview.findViewById(R.id.story_fragment_id);
 
         final TextView[] genreIcons = {(TextView) storyview.findViewById(R.id.action_button),
                 (TextView) storyview.findViewById(R.id.bio_button),
@@ -123,7 +129,7 @@ public class StoryFragmentOne extends Fragment {
                                         appDB.deleteStory(s);
                                     }
                                 }
-                                populateListView();
+                                populateListView(listFrag);
                                 getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
                                 break;
                             case DialogInterface.BUTTON_NEGATIVE:
@@ -185,7 +191,7 @@ public class StoryFragmentOne extends Fragment {
                         String classiStr = getClassi();
                         String newTitle = storyTitle.getText().toString();
                         appDB.addStory(new StoryClass(newTitle, genreStr, ageStr, classiStr));
-                        populateListView();
+                        populateListView(listFrag);
                         getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
                         Log.v("taggy","genreStr saved: " + genreStr);
                     }
@@ -267,8 +273,9 @@ public class StoryFragmentOne extends Fragment {
                             appDB.updateStory(s);
                         }
                     }
-                    populateListView();
-                    getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
+                    populateListView(listFrag);
+                    baseview.findViewById(R.id.story_list_id).setVisibility(View.VISIBLE);
+
                 }
             });
         }
@@ -293,22 +300,15 @@ public class StoryFragmentOne extends Fragment {
         return classiStr;
     }
 
-    private void populateListView() {
+    private void populateListView(View listFrag) {
 
-        List<StoryClass> storyList = appDB.getAllStories();
-        int storyCount = appDB.getStoryCount();
-        stories = new String[storyCount];
-
-        int i = 0;
-        for (StoryClass s : storyList){
-            stories[i] = s.getTitle();
-            i++;
+        if (listFrag != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("titleKey", "");
+            StoryList storyListFragment = new StoryList();
+            storyListFragment.setArguments(bundle);
+            getFragmentManager().beginTransaction().replace(R.id.story_list_id, storyListFragment).commit();
         }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.story_items, stories);
-
-        ListView list = (ListView) getActivity().findViewById(R.id.storyList);
-        list.setAdapter(adapter);
     }
 
     public void storyAttributes()
