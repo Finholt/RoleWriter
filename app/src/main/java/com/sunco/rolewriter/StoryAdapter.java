@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Connor on 12/8/2015.
+ *
  */
 public class StoryAdapter extends ArrayAdapter<String> {
     // declaring our ArrayList of items

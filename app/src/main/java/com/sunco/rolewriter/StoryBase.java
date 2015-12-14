@@ -185,7 +185,6 @@ public class StoryBase extends AppCompatActivity {
         Intent intent = new Intent(this, CharacterBase.class);
 
         intent.putExtra("StoryName", text.getText());
-
         startActivity(intent);
     }
 

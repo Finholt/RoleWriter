@@ -2,24 +2,43 @@ package com.sunco.rolewriter;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Blake Martin on 12/7/2015.
  *
  */
 public class CharFragmentThree extends Fragment {
+
+    Button saveBtn;
+    EditText charName;
+
+    DBHandler appDB = DBHandler.getInstance(getContext());
+
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
 
         final View charview = inflater.inflate(R.layout.fragment_char_three,
                 container, false);
-        final TextView[] genreIcons = {(TextView) charview.findViewById(R.id.sports_button),
+
+        final String charStr = getArguments().getString("charKey");
+        Log.v("taggy",charStr);
+        final String storyName = getArguments().getString("storyKey");
+        charName = (EditText) charview.findViewById(R.id.char_three_input);
+        charName.setText(charStr);
+        saveBtn = (Button) charview.findViewById(R.id.char_three_save_btn);
+
+        final TextView[] interestsIcons = {(TextView) charview.findViewById(R.id.sports_button),
                 (TextView) charview.findViewById(R.id.running_button),
                 (TextView) charview.findViewById(R.id.yoga_button),
                 (TextView) charview.findViewById(R.id.music_button),
@@ -44,9 +63,10 @@ public class CharFragmentThree extends Fragment {
                 (TextView) charview.findViewById(R.id.cars_button),
                 (TextView) charview.findViewById(R.id.swimming_button),
                 (TextView) charview.findViewById(R.id.gaming_button)};
-        for (int i = 0; i<genreIcons.length; i++)
+
+        for (int i = 0; i<interestsIcons.length; i++)
         {
-            genreIcons[i].setOnClickListener(new View.OnClickListener()
+            interestsIcons[i].setOnClickListener(new View.OnClickListener()
             {
                 public void onClick(View v)
                 {
@@ -132,8 +152,39 @@ public class CharFragmentThree extends Fragment {
             });
         }
 
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                String[] interestTags = new String[25];
+                for (int i =0; i<25; i++){
+                    interestTags[i] = interestsIcons[i].getTag().toString();
+                    Log.v("taggy", interestTags[i]);
+                }
+
+                String genreStr = Arrays.toString(interestTags);
+                strToArr(genreStr);
+
+                List<CharacterClass> charList = appDB.getAllChars(storyName);
+                for (CharacterClass c : charList) {
+                    String charN = c.getCharName();
+                    if (charStr.equalsIgnoreCase(charN)) {
+                        c.setInterests(genreStr);
+
+                        appDB.updateChar(c);
+                    }
+                }
+                getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
+            }
+        });
         return charview;
+    }
+
+    public String[] strToArr(String toConvert){
+        String[] result;
+        toConvert = toConvert.substring(1, toConvert.indexOf("]"));
+        result = toConvert.split(", ");
+        return result;
     }
 
     public void sportsG() {
