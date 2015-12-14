@@ -190,8 +190,38 @@ public class StoryBase extends AppCompatActivity {
 
     public void EditStory(View view) {
         RelativeLayout relLay = (RelativeLayout) view.getParent();
-        TextView text = (TextView) relLay.findViewById(R.id.story_name);
-        Toast.makeText(getApplicationContext(), text.getText().toString(),
+        TextView textView = (TextView) relLay.findViewById(R.id.story_name);
+        Toast.makeText(getApplicationContext(), textView.getText().toString(),
                 Toast.LENGTH_LONG).show();
+
+        if (findViewById(R.id.story_fragment_id).getVisibility() == View.INVISIBLE) {
+            findViewById(R.id.story_fragment_id).setVisibility(View.VISIBLE);
+        }
+
+        String ageG = "2131492993";
+        String classi = "2131492998";
+        String genre = "";
+
+        List<StoryClass> storyList = appDB.getAllStories();
+        for (StoryClass s : storyList) {
+            String storyT = s.getTitle();
+            if (textView.getText().toString().equalsIgnoreCase(storyT)) {
+                ageG = s.getAge();
+                classi = s.getClassi();
+                genre = s.getGenre();
+            }
+        }
+
+        if (findViewById(R.id.story_fragment_id) != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("titleKey", textView.getText().toString());
+            bundle.putString("ageKey", ageG);
+            bundle.putString("classiKey", classi);
+            bundle.putString("genreKey", genre);
+            StoryFragmentOne oldFrag = new StoryFragmentOne();
+            oldFrag.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.story_fragment_id, oldFrag).commit();
+        }
     }
 }
