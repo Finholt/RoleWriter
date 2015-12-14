@@ -191,8 +191,8 @@ public class StoryBase extends AppCompatActivity {
     public void EditStory(View view) {
         RelativeLayout relLay = (RelativeLayout) view.getParent();
         TextView textView = (TextView) relLay.findViewById(R.id.story_name);
-        Toast.makeText(getApplicationContext(), textView.getText().toString(),
-                Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), textView.getText().toString(),
+        //        Toast.LENGTH_LONG).show();
 
         if (findViewById(R.id.story_fragment_id).getVisibility() == View.INVISIBLE) {
             findViewById(R.id.story_fragment_id).setVisibility(View.VISIBLE);
