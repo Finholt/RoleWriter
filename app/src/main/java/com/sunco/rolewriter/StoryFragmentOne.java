@@ -68,8 +68,6 @@ public class StoryFragmentOne extends Fragment {
                 (TextView) storyview.findViewById(R.id.scifi_button),
                 (TextView) storyview.findViewById(R.id.thriller_button)};
 
-
-
         for (int i =0; i<11; i++){
             genreIcons[i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -155,6 +153,7 @@ public class StoryFragmentOne extends Fragment {
         final String titleTxt = getArguments().getString("titleKey");
         storyTitle.setText(titleTxt);
 
+        // titleTxt is only empty if it's a new story, after pressign the '+' button
         if(titleTxt.equalsIgnoreCase("")){
             saveBtn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -167,6 +166,8 @@ public class StoryFragmentOne extends Fragment {
 
                     String genreStr = Arrays.toString(genreTags);
                     strToArr(genreStr);
+
+                    //error checking for empty categories
                     if(genreStr.equalsIgnoreCase("[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]") ||
                             storyTitle.getText().toString().equalsIgnoreCase("") ||
                             ageGroup.getCheckedRadioButtonId() == -1 ||
@@ -186,7 +187,9 @@ public class StoryFragmentOne extends Fragment {
                         builder.setMessage("One or more of the require fields are empty!").setPositiveButton("Cancel", dialogClickListener)
                                 .show();
                     }
+
                     else{
+                        // add a new story
                         String ageStr = getAge();
                         String classiStr = getClassi();
                         String newTitle = storyTitle.getText().toString();

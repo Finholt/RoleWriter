@@ -7,11 +7,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
 public class CharacterBase extends AppCompatActivity {
+
+    String StoryName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,19 +22,25 @@ public class CharacterBase extends AppCompatActivity {
         setContentView(R.layout.activity_character_base);
 
         Intent PassedValues = getIntent();
-        String StoryName = PassedValues.getStringExtra("StoryName");
-        Toast.makeText(getApplicationContext(), StoryName,
-                Toast.LENGTH_LONG).show();
+        StoryName = PassedValues.getStringExtra("StoryName");
+        /*Toast.makeText(getApplicationContext(), StoryName,
+                Toast.LENGTH_LONG).show();*/
 
-        if (findViewById(R.id.story_fragment_id) != null) {
+        TextView storyTitle = (TextView) findViewById(R.id.storyTitle);
+        storyTitle.setText(StoryName);
+
+
+        /*if (findViewById(R.id.story_fragment_id) != null) {
             Bundle bundle = new Bundle();
             bundle.putString("titleKey","");
+            bundle.putString("storyKey",StoryName);
             CharFragmentOne charFragmentOne = new CharFragmentOne();
             charFragmentOne.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.story_fragment_id, charFragmentOne).commit();
-        }
+        }*/
 
+        //findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
         populateListView();
     }
     private void populateListView() {
@@ -51,5 +60,20 @@ public class CharacterBase extends AppCompatActivity {
 
         //ListView list = (ListView) findViewById(R.id.storyList);
         //list.setAdapter(adapter);
+    }
+
+    public void onClick(View v)
+    {
+        switch (v.getId()) {
+            case R.id.AddButton:
+                Bundle bundle = new Bundle();
+                bundle.putString("titleKey","");
+                bundle.putString("storyKey",StoryName);
+                CharFragmentOne charFragmentOne = new CharFragmentOne();
+                charFragmentOne.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.story_fragment_id, charFragmentOne).commit();
+                break;
+        }
     }
 }
