@@ -57,7 +57,7 @@ public class CharacterList extends android.support.v4.app.Fragment {
 
         CharacterAdapter adapter = new CharacterAdapter(this.getActivity(), charactername);
 
-        listView = (ListView) characterlistview.findViewById(R.id.storyList);
+        listView = (ListView) characterlistview.findViewById(R.id.characterList);
 
         listView.setAdapter(adapter);
 
