@@ -3,7 +3,7 @@
     android:layout_width="450dp"
     android:layout_marginLeft="450dp"
     android:layout_height="fill_parent"
-    android:background="#d3d3d3"
+    android:background="#FFFFFF"
     android:id="@+id/scrollView"
     android:visibility="visible"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -12,6 +12,11 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="177dp"
+            android:background="#15586A"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -40,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/exit_button"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="100dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             />
 
@@ -49,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/character_edit_text"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="100dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             />
         <TextView android:text="@string/direction"
