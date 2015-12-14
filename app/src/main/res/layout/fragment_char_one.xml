@@ -54,6 +54,7 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
             android:id="@+id/character_edit_text"
+            android:singleLine="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/exit_button"
@@ -159,14 +160,14 @@
             android:text="@string/male"
             android:layout_alignTop="@id/gender_radio_group"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="120dp" />
+            android:layout_marginLeft="140dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/female"
             android:layout_alignTop="@id/gender_radio_group"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="210dp" />
+            android:layout_marginLeft="222dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -185,6 +186,7 @@
             android:layout_marginTop="70dp" />
         <EditText
             android:id="@+id/age_edit_text"
+            android:singleLine="true"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/age_id"
@@ -202,6 +204,7 @@
             android:layout_marginTop="60dp" />
         <EditText
             android:id="@+id/location_edit_text"
+            android:singleLine="true"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/location_id"
@@ -219,6 +222,7 @@
             android:layout_marginTop="60dp" />
         <EditText
             android:id="@+id/occupation_edit_text"
+            android:singleLine="true"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/occupation_id"
@@ -263,14 +267,14 @@
             android:text="@string/low"
             android:layout_alignTop="@id/income_radio_group"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="120dp" />
+            android:layout_marginLeft="142dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/medium"
             android:layout_alignTop="@id/income_radio_group"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="210dp" />
+            android:layout_marginLeft="220dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -297,12 +301,14 @@
             android:layout_marginTop="60dp" />
         <EditText
             android:id="@+id/height_edit_text"
+            android:singleLine="true"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/height_id"
             android:layout_marginTop="-15dp"
             android:layout_marginLeft="150dp"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -313,6 +319,7 @@
             android:layout_marginTop="60dp" />
         <EditText
             android:id="@+id/weight_edit_text"
+            android:singleLine="true"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/weight_id"
@@ -330,6 +337,7 @@
             android:layout_marginTop="60dp" />
         <EditText
             android:id="@+id/eye_color_edit_text"
+            android:singleLine="true"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/eye_color_id"
@@ -347,6 +355,7 @@
             android:layout_marginTop="60dp" />
         <EditText
             android:id="@+id/hair_color_edit_text"
+            android:singleLine="true"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/hair_color_id"
@@ -364,6 +373,7 @@
             android:layout_marginTop="60dp" />
         <EditText
             android:id="@+id/nationality_edit_text"
+            android:singleLine="true"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/nationality_id"
