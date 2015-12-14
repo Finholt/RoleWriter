@@ -36,6 +36,8 @@
 
     <string name="preference_file_key">WR_PREFERENCE_KEY</string>
     <string name="first_time_key">true</string>
+    <string name="notes">Additional Notes</string>
+    <string name="edit_notes">Add notes here</string>
 
     <!-- For char_fragment_one      - Blake Martin -->
     <string name="character_name_input">Name of Character</string>
@@ -110,7 +112,6 @@
     <string name="title_activity_character">CharacterActivity</string>
     <string name="title_activity_story_fragment_one">StoryFragmentOne</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_character_base">CharacterBase</string>
 
 </resources>

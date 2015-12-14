@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="450dp"
+    android:layout_marginLeft="450dp"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:id="@+id/scrollView"
+    android:visibility="visible"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="177dp"
+            android:background="#15586A"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/exit_button"
+            android:background="@drawable/exit"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="350dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/exit_button"
+            android:id="@+id/erase_button"
+            android:background="@drawable/erase"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="315dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="13dp"
+            android:layout_toRightOf="@+id/exit_button"
+            android:id="@+id/save_button"
+            android:background="@drawable/save"
+            />
+
+        <EditText
+            android:textStyle="bold"
+            android:hint="@string/character_name_input"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:id="@+id/character_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/exit_button"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notes"
+            android:id="@+id/notes_id"
+            android:layout_alignTop="@+id/character_edit_text"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin" />
+        <EditText
+            android:id="@+id/synopsis_edit_text"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_notes"
+            android:layout_alignTop="@+id/notes_id"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            />
+
+        </RelativeLayout>
+    </ScrollView>
