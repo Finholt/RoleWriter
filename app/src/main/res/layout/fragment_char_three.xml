@@ -30,17 +30,29 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="340dp"
+            android:layout_marginLeft="350dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/exit_button"
             android:id="@+id/erase_button"
             android:background="@drawable/erase"
             />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="315dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="13dp"
+            android:layout_toRightOf="@+id/exit_button"
+            android:id="@+id/save_button"
+            android:background="@drawable/save"
+            />
 
         <EditText
             android:textStyle="bold"
             android:hint="@string/character_name_input"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
             android:id="@+id/char_three_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
