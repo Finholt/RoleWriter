@@ -99,7 +99,7 @@ public class CharFragmentOne extends Fragment{
                 bundle.putString("storyKey",storyName);
                 CharFragmentTwo charFragmentTwo = new CharFragmentTwo();
                 charFragmentTwo.setArguments(bundle);
-                getFragmentManager().beginTransaction().replace(R.id.story_fragment_id,charFragmentTwo)
+                getFragmentManager().beginTransaction().replace(R.id.character_fragment_id,charFragmentTwo)
                         .addToBackStack(null)
                         .commit();
             }

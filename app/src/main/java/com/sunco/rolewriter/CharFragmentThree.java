@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -21,6 +22,7 @@ public class CharFragmentThree extends Fragment {
 
     Button saveBtn;
     EditText charName;
+    FrameLayout listFrag;
 
     DBHandler appDB = DBHandler.getInstance(getContext());
 
@@ -30,6 +32,8 @@ public class CharFragmentThree extends Fragment {
 
         final View charview = inflater.inflate(R.layout.fragment_char_three,
                 container, false);
+        final View baseview = inflater.inflate(R.layout.activity_character_base,
+                container, false);
 
         final String charStr = getArguments().getString("charKey");
         Log.v("taggy",charStr);
@@ -37,6 +41,8 @@ public class CharFragmentThree extends Fragment {
         charName = (EditText) charview.findViewById(R.id.char_three_input);
         charName.setText(charStr);
         saveBtn = (Button) charview.findViewById(R.id.char_three_save_btn);
+        listFrag = (FrameLayout) baseview.findViewById(R.id.character_fragment_id);
+
 
         final TextView[] interestsIcons = {(TextView) charview.findViewById(R.id.sports_button),
                 (TextView) charview.findViewById(R.id.running_button),
@@ -164,7 +170,6 @@ public class CharFragmentThree extends Fragment {
 
                 String genreStr = Arrays.toString(interestTags);
                 strToArr(genreStr);
-
                 List<CharacterClass> charList = appDB.getAllChars(storyName);
                 for (CharacterClass c : charList) {
                     String charN = c.getCharName();
@@ -172,12 +177,30 @@ public class CharFragmentThree extends Fragment {
                         c.setInterests(genreStr);
 
                         appDB.updateChar(c);
+
                     }
                 }
-                getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
+
+                populateListView(listFrag);
+
+                getActivity().findViewById(R.id.character_fragment_id).setVisibility(View.INVISIBLE);
+
             }
         });
         return charview;
+    }
+
+    private void populateListView(View listFrag) {
+
+        String storyName = getArguments().getString("storyKey");
+        if (listFrag != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("titleKey", "");
+            bundle.putString("storyKey", storyName);
+            CharacterList characterListFragment = new CharacterList();
+            characterListFragment.setArguments(bundle);
+            getFragmentManager().beginTransaction().replace(R.id.character_list_id, characterListFragment).commit();
+        }
     }
 
     public String[] strToArr(String toConvert){

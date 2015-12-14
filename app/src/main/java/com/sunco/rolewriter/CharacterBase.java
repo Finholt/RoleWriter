@@ -51,13 +51,13 @@ public class CharacterBase extends AppCompatActivity {
         }
 
         //findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
-        populateListView();
+        //populateListView();
     }
     private void populateListView() {
 
         //List<StoryClass> storyList = appDB.getAllStories();
         //int storyCount = appDB.getStoryCount();
-        String[] characters = {"Harry", "Ron", "Hermione"};
+        //String[] characters = {"Harry", "Ron", "Hermione"};
         //stories = new String[storyCount];
 
         /*int i = 0;
@@ -82,7 +82,7 @@ public class CharacterBase extends AppCompatActivity {
                 CharFragmentOne charFragmentOne = new CharFragmentOne();
                 charFragmentOne.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction()
-                        .add(R.id.story_fragment_id, charFragmentOne).commit();
+                        .add(R.id.character_fragment_id, charFragmentOne).commit();
                 break;
         }
     }
