@@ -22,7 +22,7 @@ public class StoryItems {
         return storyName;
     }
 
-    public void setStroyName(String s)
+    public void setStoryName(String s)
     {
         this.storyName = s;
     }

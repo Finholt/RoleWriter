@@ -23,22 +23,32 @@ public class CharacterBase extends AppCompatActivity {
 
         Intent PassedValues = getIntent();
         StoryName = PassedValues.getStringExtra("StoryName");
-        /*Toast.makeText(getApplicationContext(), StoryName,
-                Toast.LENGTH_LONG).show();*/
 
         TextView storyTitle = (TextView) findViewById(R.id.storyTitle);
         storyTitle.setText(StoryName);
 
+        /*findViewById(R.id.character_fragment_id).setVisibility(View.INVISIBLE);
 
-        /*if (findViewById(R.id.story_fragment_id) != null) {
+        if (findViewById(R.id.character_fragment_id) != null) {
             Bundle bundle = new Bundle();
             bundle.putString("titleKey","");
             bundle.putString("storyKey",StoryName);
             CharFragmentOne charFragmentOne = new CharFragmentOne();
             charFragmentOne.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.story_fragment_id, charFragmentOne).commit();
+                    .add(R.id.character_fragment_id, charFragmentOne).commit();
         }*/
+
+        findViewById(R.id.character_list_id).setVisibility(View.VISIBLE);
+
+        if (findViewById(R.id.character_list_id) != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("titleKey", "");
+            bundle.putString("storyKey",StoryName);
+            CharacterList characterListFragment = new CharacterList();
+            characterListFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().add(R.id.character_list_id, characterListFragment).commit();
+        }
 
         //findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
         populateListView();

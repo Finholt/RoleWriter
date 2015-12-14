@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="55dp"
+    android:padding="6dip">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#939598"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:onClick="OpenCharacters"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:id="@+id/character_name"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notes"
+        android:textSize="20sp"
+        android:textColor="#0085A7"
+        android:layout_toStartOf="@+id/right_bar_char"
+        android:layout_toLeftOf="@+id/right_bar_char"
+        android:layout_centerVertical="true"
+        android:id="@+id/notes_button_char"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="30dp"
+        android:background="#939598"
+        android:layout_toLeftOf="@+id/delete_button_char"
+        android:layout_toStartOf="@+id/delete_button_char"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/right_bar_char"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:textSize="20sp"
+        android:textColor="#0085A7"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:id="@+id/delete_button_char"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="55dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
+
+
+
+
+
