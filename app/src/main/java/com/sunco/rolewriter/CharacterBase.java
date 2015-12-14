@@ -46,7 +46,7 @@ public class CharacterBase extends AppCompatActivity {
 
         if (findViewById(R.id.character_list_id) != null) {
             Bundle bundle = new Bundle();
-            bundle.putString("titleKey", "");
+            bundle.putString("charKey", "");
             bundle.putString("storyKey", StoryName);
             CharacterList characterListFragment = new CharacterList();
             characterListFragment.setArguments(bundle);
@@ -80,7 +80,7 @@ public class CharacterBase extends AppCompatActivity {
         switch (v.getId()) {
             case R.id.AddButton:
                 Bundle bundle = new Bundle();
-                bundle.putString("titleKey","");
+                bundle.putString("charKey","");
                 bundle.putString("storyKey",StoryName);
                 CharFragmentOne charFragmentOne = new CharFragmentOne();
                 charFragmentOne.setArguments(bundle);
@@ -91,34 +91,63 @@ public class CharacterBase extends AppCompatActivity {
     }
 
     public void EditCharacter(View view) {
-        TextView textView = (TextView) view;
+        RelativeLayout relLay = (RelativeLayout) view.getParent();
+        TextView textView = (TextView) relLay.findViewById(R.id.character_name);
 
         if (findViewById(R.id.character_fragment_id).getVisibility() == View.INVISIBLE) {
             findViewById(R.id.character_fragment_id).setVisibility(View.VISIBLE);
         }
         //TODO: Fix just about everything below this comment.  Use EditStory Method in StoryBase as reference.  Most is based off of Jit's code.
-        String ageG = "2131492993";
-        String classi = "2131492998";
-        String genre = "";
+        String dir = "";
+        String gender = "";
+        String age ="";
+        String loc = "";
+        String occ = "";
+        String inc = "";
+        String height = "";
+        String weight = "";
+        String eyec = "";
+        String hairc = "";
+        String nation = "";
 
         List<CharacterClass> characterList = appDB.getAllChars(StoryName);
         for (CharacterClass c : characterList) {
             String characterN = c.getCharName();
             if (textView.getText().toString().equalsIgnoreCase(characterN)) {
-                ageG = c.getAge();
-                classi = c.getClassi();
-                genre = c.getGenre();
+                dir = c.getDirection();
+                gender = c.getGender();
+                age = c.getAge();
+                loc = c.getLocation();
+                occ = c.getOccupation();
+                inc = c.getIncome();
+                height = c.getHeight();
+                weight = c.getWeight();
+                eyec = c.getEyeC();
+                hairc = c.getHairC();
+                nation = c.getNation();
+
+                appDB.updateChar(c);
+
             }
         }
 
         if (findViewById(R.id.character_fragment_id) != null) {
             Bundle bundle = new Bundle();
-            bundle.putString("titleKey", textView.getText().toString());
-            bundle.putString("ageKey", ageG);
-            bundle.putString("classiKey", classi);
-            bundle.putString("genreKey", genre);
             CharFragmentOne oldFrag = new CharFragmentOne();
             oldFrag.setArguments(bundle);
+            bundle.putString("storyKey", StoryName);
+            bundle.putString("charKey",textView.getText().toString());
+            bundle.putString("dirKey",dir);
+            bundle.putString("genderKey",gender);
+            bundle.putString("ageKey",age);
+            bundle.putString("locKey",loc);
+            bundle.putString("occKey",occ);
+            bundle.putString("incKey",inc);
+            bundle.putString("heightKey",height);
+            bundle.putString("weightKey",weight);
+            bundle.putString("eyeKey",eyec);
+            bundle.putString("hairKey",hairc);
+            bundle.putString("nationKey",nation);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.character_fragment_id, oldFrag).commit();
         }

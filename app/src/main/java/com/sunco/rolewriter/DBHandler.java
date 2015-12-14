@@ -213,7 +213,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 newChar.setLocation(cursor.getString(6));
                 newChar.setOccupation(cursor.getString(7));
                 newChar.setIncome(cursor.getString(8));
-                newChar.setWeight(cursor.getString(9));
+                newChar.setHeight(cursor.getString(9));
                 newChar.setWeight(cursor.getString(10));
                 newChar.setEyeC(cursor.getString(11));
                 newChar.setHairC(cursor.getString(12));
@@ -225,8 +225,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 newChar.setSelfish(cursor.getString(18));
                 newChar.setQuiet(cursor.getString(19));
                 newChar.setBrave(cursor.getString(20));
-                newChar.setBrave(cursor.getString(21));
-                newChar.setCalm(cursor.getString(22));
+                newChar.setCalm(cursor.getString(21));
+                newChar.setInterests(cursor.getString(22));
                 // Adding joke to list
                 characterList.add(newChar);
             } while (cursor.moveToNext());

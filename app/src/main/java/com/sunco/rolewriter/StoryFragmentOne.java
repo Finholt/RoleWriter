@@ -153,7 +153,7 @@ public class StoryFragmentOne extends Fragment {
         final String titleTxt = getArguments().getString("titleKey");
         storyTitle.setText(titleTxt);
 
-        // titleTxt is only empty if it's a new story, after pressign the '+' button
+        // titleTxt is only empty if it's a new story, after pressing the '+' button
         if(titleTxt.equalsIgnoreCase("")){
             saveBtn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {

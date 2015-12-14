@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 /**
  * Created by Connor on 12/13/2015.
+ *
  */
 public class CharacterAdapter extends ArrayAdapter<String> {
     // declaring our ArrayList of items

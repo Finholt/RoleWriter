@@ -1,5 +1,7 @@
 package com.sunco.rolewriter;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -42,6 +45,44 @@ public class CharFragmentThree extends Fragment {
         charName.setText(charStr);
         saveBtn = (Button) charview.findViewById(R.id.char_three_save_btn);
         listFrag = (FrameLayout) baseview.findViewById(R.id.character_fragment_id);
+        
+        ImageView closeEdit = (ImageView) charview.findViewById(R.id.exit_button);
+        closeEdit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                getActivity().findViewById(R.id.character_fragment_id).setVisibility(View.INVISIBLE);
+            }
+        });
+
+        ImageView delChar = (ImageView) charview.findViewById(R.id.erase_button);
+        delChar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                List<CharacterClass> charList = appDB.getAllChars(storyName);
+                                for (CharacterClass c : charList) {
+                                    String charN = c.getCharName();
+                                    if (charName.getText().toString().equalsIgnoreCase(charN)) {
+                                        appDB.deleteChar(c);
+                                    }
+                                }
+                                populateListView(listFrag);
+                                getActivity().findViewById(R.id.character_fragment_id).setVisibility(View.INVISIBLE);
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+                // Confirmation prompt
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage("Are you sure you want to delete this character?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+            }
+        });
 
 
         final TextView[] interestsIcons = {(TextView) charview.findViewById(R.id.sports_button),
@@ -158,6 +199,44 @@ public class CharFragmentThree extends Fragment {
             });
         }
 
+        if(!getArguments().getString("intsKey").equalsIgnoreCase("")){
+
+            String[] intTags;
+            intTags = strToArr(getArguments().getString("intsKey"));
+
+            for (int i =0; i<25; i++){
+                interestsIcons[i].setTag(intTags[i]);
+            }
+
+            Log.v("taggy",Arrays.toString(intTags));
+
+            sportsLoad(charview);
+            yogaLoad(charview);
+            runLoad(charview);
+            musicLoad(charview);
+            writingLoad(charview);
+            readingLoad(charview);
+            photoLoad(charview);
+            artLoad(charview);
+            foodLoad(charview);
+            relaxLoad(charview);
+            campLoad(charview);
+            hikeLoad(charview);
+            travelLoad(charview);
+            danceLoad(charview);
+            cookLoad(charview);
+            bakeLoad(charview);
+            craftLoad(charview);
+            gardenLoad(charview);
+            huntingLoad(charview);
+            learnLoad(charview);
+            socialLoad(charview);
+            sleepLoad(charview);
+            carsLoad(charview);
+            swimLoad(charview);
+            gameLoad(charview);
+        }
+
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,11 +244,12 @@ public class CharFragmentThree extends Fragment {
                 String[] interestTags = new String[25];
                 for (int i =0; i<25; i++){
                     interestTags[i] = interestsIcons[i].getTag().toString();
-                    Log.v("taggy", interestTags[i]);
                 }
 
                 String genreStr = Arrays.toString(interestTags);
                 strToArr(genreStr);
+
+
                 List<CharacterClass> charList = appDB.getAllChars(storyName);
                 for (CharacterClass c : charList) {
                     String charN = c.getCharName();
@@ -332,7 +412,7 @@ public class CharFragmentThree extends Fragment {
     }
     public void travelG() {
         if (Integer.parseInt(getView().findViewById(R.id.travel_button).getTag().toString()) == 1) {
-            getView().findViewById(R.id.travel_button).setBackgroundResource(R.drawable.travel);
+            getView().findViewById(R.id.travel_button).setBackgroundResource(R.drawable.flying_selected);
             getView().findViewById(R.id.travel_button).setTag(2);
         } else {
             getView().findViewById(R.id.travel_button).setBackgroundResource(R.drawable.travel);
@@ -459,6 +539,347 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.gaming_button).setTag(1);
         }
 
+    }
+
+    public void sportsLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.sports_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.sports_button).setBackgroundResource(R.drawable.sports);
+        }
+        else
+        {
+            v.findViewById(R.id.sports_button).setBackgroundResource(R.drawable.sports_selected);
+            v.findViewById(R.id.sports_button).setTag(2);
+        }
+    }
+
+    public void yogaLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.yoga_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.yoga_button).setBackgroundResource(R.drawable.yoga);
+        }
+        else
+        {
+            v.findViewById(R.id.yoga_button).setBackgroundResource(R.drawable.yoga_selected);
+            v.findViewById(R.id.yoga_button).setTag(2);
+        }
+    }
+
+    public void runLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.running_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.running_button).setBackgroundResource(R.drawable.running);
+        }
+        else
+        {
+            v.findViewById(R.id.running_button).setBackgroundResource(R.drawable.running_selected);
+            v.findViewById(R.id.running_button).setTag(2);
+        }
+    }
+
+    public void musicLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.music_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.music_button).setBackgroundResource(R.drawable.music);
+        }
+        else
+        {
+            v.findViewById(R.id.music_button).setBackgroundResource(R.drawable.music_selected);
+            v.findViewById(R.id.music_button).setTag(2);
+        }
+    }
+    public void writingLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.writing_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.writing_button).setBackgroundResource(R.drawable.writing);
+        }
+        else
+        {
+            v.findViewById(R.id.writing_button).setBackgroundResource(R.drawable.writing_selected);
+            v.findViewById(R.id.writing_button).setTag(2);
+        }
+    }
+
+    public void readingLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.reading_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.reading_button).setBackgroundResource(R.drawable.reading);
+        }
+        else
+        {
+            v.findViewById(R.id.reading_button).setBackgroundResource(R.drawable.reading_selected);
+            v.findViewById(R.id.reading_button).setTag(2);
+        }
+    }
+
+
+    public void photoLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.photography_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.photography_button).setBackgroundResource(R.drawable.photography);
+        }
+        else
+        {
+            v.findViewById(R.id.photography_button).setBackgroundResource(R.drawable.photography_selected);
+            v.findViewById(R.id.photography_button).setTag(2);
+        }
+    }
+
+    public void artLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.art_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.art_button).setBackgroundResource(R.drawable.art);
+        }
+        else
+        {
+            v.findViewById(R.id.art_button).setBackgroundResource(R.drawable.art_selected);
+            v.findViewById(R.id.art_button).setTag(2);
+        }
+    }
+
+
+    public void foodLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.food_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.food_button).setBackgroundResource(R.drawable.food);
+        }
+        else
+        {
+            v.findViewById(R.id.food_button).setBackgroundResource(R.drawable.food_selected);
+            v.findViewById(R.id.food_button).setTag(2);
+        }
+    }
+
+
+    public void relaxLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.relaxing_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.relaxing_button).setBackgroundResource(R.drawable.relaxing);
+        }
+        else
+        {
+            v.findViewById(R.id.relaxing_button).setBackgroundResource(R.drawable.relaxing_selected);
+            v.findViewById(R.id.relaxing_button).setTag(2);
+        }
+    }
+
+
+    public void campLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.camping_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.camping_button).setBackgroundResource(R.drawable.camping);
+        }
+        else
+        {
+            v.findViewById(R.id.camping_button).setBackgroundResource(R.drawable.camping_selected);
+            v.findViewById(R.id.camping_button).setTag(2);
+        }
+    }
+
+
+    public void hikeLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.hiking_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.hiking_button).setBackgroundResource(R.drawable.hiking);
+        }
+        else
+        {
+            v.findViewById(R.id.hiking_button).setBackgroundResource(R.drawable.hiking_selected);
+            v.findViewById(R.id.hiking_button).setTag(2);
+        }
+    }
+
+
+    public void travelLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.travel_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.travel_button).setBackgroundResource(R.drawable.travel);
+        }
+        else
+        {
+            v.findViewById(R.id.travel_button).setBackgroundResource(R.drawable.flying_selected);
+            v.findViewById(R.id.travel_button).setTag(2);
+        }
+    }
+
+
+    public void danceLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.dancing_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.dancing_button).setBackgroundResource(R.drawable.dancing);
+        }
+        else
+        {
+            v.findViewById(R.id.dancing_button).setBackgroundResource(R.drawable.dancing_selected);
+            v.findViewById(R.id.dancing_button).setTag(2);
+        }
+    }
+
+
+    public void cookLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.cooking_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.cooking_button).setBackgroundResource(R.drawable.cooking);
+        }
+        else
+        {
+            v.findViewById(R.id.cooking_button).setBackgroundResource(R.drawable.cooking_selected);
+            v.findViewById(R.id.cooking_button).setTag(2);
+        }
+    }
+
+
+    public void bakeLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.baking_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.baking_button).setBackgroundResource(R.drawable.baking);
+        }
+        else
+        {
+            v.findViewById(R.id.baking_button).setBackgroundResource(R.drawable.baking_selected);
+            v.findViewById(R.id.baking_button).setTag(2);
+        }
+    }
+
+
+    public void craftLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.craft_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.craft_button).setBackgroundResource(R.drawable.crafting);
+        }
+        else
+        {
+            v.findViewById(R.id.craft_button).setBackgroundResource(R.drawable.crafting_selected);
+            v.findViewById(R.id.craft_button).setTag(2);
+        }
+    }
+
+
+    public void gardenLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.gardening_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.gardening_button).setBackgroundResource(R.drawable.gardeing);
+        }
+        else
+        {
+            v.findViewById(R.id.gardening_button).setBackgroundResource(R.drawable.gardening_selected);
+            v.findViewById(R.id.gardening_button).setTag(2);
+        }
+    }
+
+    public void huntingLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.hunting_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.hunting_button).setBackgroundResource(R.drawable.hunting);
+        }
+        else
+        {
+            v.findViewById(R.id.hunting_button).setBackgroundResource(R.drawable.hunting_selected);
+            v.findViewById(R.id.hunting_button).setTag(2);
+        }
+    }
+
+
+    public void learnLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.learning_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.learning_button).setBackgroundResource(R.drawable.learning);
+        }
+        else
+        {
+            v.findViewById(R.id.learning_button).setBackgroundResource(R.drawable.learning_selected);
+            v.findViewById(R.id.learning_button).setTag(2);
+        }
+    }
+
+
+    public void socialLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.social_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.social_button).setBackgroundResource(R.drawable.socializing);
+        }
+        else
+        {
+            v.findViewById(R.id.social_button).setBackgroundResource(R.drawable.socializing_selected);
+            v.findViewById(R.id.social_button).setTag(2);
+        }
+    }
+
+
+    public void sleepLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.sleeping_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.sleeping_button).setBackgroundResource(R.drawable.sleeping);
+        }
+        else
+        {
+            v.findViewById(R.id.sleeping_button).setBackgroundResource(R.drawable.sleeping_selected);
+            v.findViewById(R.id.sleeping_button).setTag(2);
+        }
+    }
+
+
+    public void carsLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.cars_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.cars_button).setBackgroundResource(R.drawable.car);
+        }
+        else
+        {
+            v.findViewById(R.id.cars_button).setBackgroundResource(R.drawable.cars_selected);
+            v.findViewById(R.id.cars_button).setTag(2);
+        }
+    }
+
+
+    public void swimLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.swimming_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.swimming_button).setBackgroundResource(R.drawable.swimming);
+        }
+        else
+        {
+            v.findViewById(R.id.swimming_button).setBackgroundResource(R.drawable.swimming_selected);
+            v.findViewById(R.id.swimming_button).setTag(2);
+        }
+    }
+
+
+    public void gameLoad(View v)
+    {
+        if (Integer.parseInt(v.findViewById(R.id.gaming_button).getTag().toString()) == 1)
+        {
+            v.findViewById(R.id.gaming_button).setBackgroundResource(R.drawable.gaming);
+        }
+        else
+        {
+            v.findViewById(R.id.gaming_button).setBackgroundResource(R.drawable.gaming_selected);
+            v.findViewById(R.id.gaming_button).setTag(2);
+        }
     }
 
 }

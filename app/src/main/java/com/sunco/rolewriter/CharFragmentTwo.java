@@ -1,12 +1,17 @@
 package com.sunco.rolewriter;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -34,11 +39,73 @@ public class CharFragmentTwo extends Fragment {
         charName = (EditText) charview.findViewById(R.id.char_two_input);
         charName.setText(charStr);
 
+        ImageView closeEdit = (ImageView) charview.findViewById(R.id.exit_button);
+        closeEdit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                getActivity().findViewById(R.id.character_fragment_id).setVisibility(View.INVISIBLE);
+            }
+        });
+
+        ImageView delChar = (ImageView) charview.findViewById(R.id.erase_button);
+        final FrameLayout listFrag = (FrameLayout) getActivity().findViewById(R.id.character_fragment_id);
+        delChar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                List<CharacterClass> charList = appDB.getAllChars(storyName);
+                                for (CharacterClass c : charList) {
+                                    String charN = c.getCharName();
+                                    if (charName.getText().toString().equalsIgnoreCase(charN)) {
+                                        appDB.deleteChar(c);
+                                    }
+                                }
+                                populateListView(listFrag);
+                                getActivity().findViewById(R.id.character_fragment_id).setVisibility(View.INVISIBLE);
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+                // Confirmation prompt
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage("Are you sure you want to delete this character?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+            }
+        });
+
+
+        hardw = (RadioGroup) charview.findViewById(R.id.one_radio_group);
+        happy = (RadioGroup) charview.findViewById(R.id.two_radio_group);
+        smart = (RadioGroup) charview.findViewById(R.id.three_radio_group);
+        polite = (RadioGroup) charview.findViewById(R.id.four_radio_group);
+        selfish = (RadioGroup) charview.findViewById(R.id.five_radio_group);
+        quiet = (RadioGroup) charview.findViewById(R.id.six_radio_group);
+        brave = (RadioGroup) charview.findViewById(R.id.seven_radio_group);
+        calm = (RadioGroup) charview.findViewById(R.id.eight_radio_group);
+
+        if(getArguments().getString("newKey").equalsIgnoreCase("existing"))
+        {
+            hardw.check(Integer.valueOf(getArguments().getString("hardKey")));
+            happy.check(Integer.valueOf(getArguments().getString("happyKey")));
+            smart.check(Integer.valueOf(getArguments().getString("smartKey")));
+            polite.check(Integer.valueOf(getArguments().getString("politeKey")));
+            selfish.check(Integer.valueOf(getArguments().getString("selfishKey")));
+            quiet.check(Integer.valueOf(getArguments().getString("quietKey")));
+            brave.check(Integer.valueOf(getArguments().getString("braveKey")));
+            calm.check(Integer.valueOf(getArguments().getString("calmKey")));
+        }
+
         Button save = (Button) charview.findViewById(R.id.char_two_save_btn);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                String interests = "";
                 List<CharacterClass> charList = appDB.getAllChars(storyName);
                 for (CharacterClass c : charList) {
                     String charN = c.getCharName();
@@ -61,6 +128,8 @@ public class CharFragmentTwo extends Fragment {
                         c.setBrave(brave);
                         c.setCalm(calm);
 
+                        interests = c.getInterests();
+
                         appDB.updateChar(c);
                     }
                 }
@@ -70,6 +139,7 @@ public class CharFragmentTwo extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("charKey",charTxt);
                 bundle.putString("storyKey",storyName);
+                bundle.putString("intsKey",interests);
                 CharFragmentThree charFragmentThree = new CharFragmentThree();
                 charFragmentThree.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.character_fragment_id, charFragmentThree)
@@ -151,5 +221,18 @@ public class CharFragmentTwo extends Fragment {
         //String ageStr = ageBtn.getText().toString();
         //return ageStr;
         return String.valueOf(btn.getId());
+    }
+
+    private void populateListView(View listFrag) {
+
+        String storyName = getArguments().getString("storyKey");
+        if (listFrag != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("titleKey", "");
+            bundle.putString("storyKey", storyName);
+            CharacterList characterListFragment = new CharacterList();
+            characterListFragment.setArguments(bundle);
+            getFragmentManager().beginTransaction().replace(R.id.character_list_id, characterListFragment).commit();
+        }
     }
 }
