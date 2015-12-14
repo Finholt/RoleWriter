@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -186,5 +187,12 @@ public class StoryBase extends AppCompatActivity {
         intent.putExtra("StoryName", text.getText());
 
         startActivity(intent);
+    }
+
+    public void EditStory(View view) {
+        RelativeLayout relLay = (RelativeLayout) view.getParent();
+        TextView text = (TextView) relLay.findViewById(R.id.story_name);
+        Toast.makeText(getApplicationContext(), text.getText().toString(),
+                Toast.LENGTH_LONG).show();
     }
 }
