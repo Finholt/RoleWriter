@@ -241,6 +241,8 @@ public class CharFragmentThree extends Fragment {
             @Override
             public void onClick(View v) {
 
+
+
                 String[] interestTags = new String[25];
                 for (int i =0; i<25; i++){
                     interestTags[i] = interestsIcons[i].getTag().toString();
@@ -248,22 +250,23 @@ public class CharFragmentThree extends Fragment {
 
                 String genreStr = Arrays.toString(interestTags);
                 strToArr(genreStr);
+                
+                    List<CharacterClass> charList = appDB.getAllChars(storyName);
+                    for (CharacterClass c : charList) {
+                        String charN = c.getCharName();
+                        if (charStr.equalsIgnoreCase(charN)) {
+                            c.setInterests(genreStr);
 
+                            appDB.updateChar(c);
 
-                List<CharacterClass> charList = appDB.getAllChars(storyName);
-                for (CharacterClass c : charList) {
-                    String charN = c.getCharName();
-                    if (charStr.equalsIgnoreCase(charN)) {
-                        c.setInterests(genreStr);
-
-                        appDB.updateChar(c);
-
+                        }
                     }
-                }
 
-                populateListView(listFrag);
+                    populateListView(listFrag);
 
-                getActivity().findViewById(R.id.character_fragment_id).setVisibility(View.INVISIBLE);
+                    getActivity().findViewById(R.id.character_fragment_id).setVisibility(View.INVISIBLE);
+
+
 
             }
         });

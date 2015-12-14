@@ -10,22 +10,28 @@ public class StoryClass {
     String _genre;
     String _ageRange;
     String _classification;
+    String _summary;
+    String _notes;
 
     public StoryClass(){}
 
-    public StoryClass(int id, String title, String genre, String ageRange, String classification){
+    public StoryClass(int id, String title, String genre, String ageRange, String classification, String summary, String notes){
         this._id = id;
         this._title = title;
         this._genre = genre;
         this._ageRange = ageRange;
         this._classification = classification;
+        this._summary = summary;
+        this._notes = notes;
     }
 
-    public StoryClass(String title, String genre, String ageRange, String classification){
+    public StoryClass(String title, String genre, String ageRange, String classification, String summary, String notes){
         this._title = title;
         this._genre = genre;
         this._ageRange = ageRange;
         this._classification = classification;
+        this._summary = summary;
+        this._notes = notes;
     }
 
     public int getID(){
@@ -66,5 +72,17 @@ public class StoryClass {
 
     public void setClassi(String s){
         this._classification = s;
+    }
+
+    public String getSummary(){return this._summary;}
+
+    public void setSummary(String s){
+        this._summary = s;
+    }
+
+    public String getNotes(){return this._notes;}
+
+    public void setNotes(String s){
+        this._notes = s;
     }
 }

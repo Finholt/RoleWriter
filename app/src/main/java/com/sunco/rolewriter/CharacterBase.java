@@ -27,7 +27,7 @@ public class CharacterBase extends AppCompatActivity {
         Intent PassedValues = getIntent();
         StoryName = PassedValues.getStringExtra("StoryName");
 
-        TextView storyTitle = (TextView) findViewById(R.id.storyTitle);
+        TextView storyTitle = (TextView) findViewById(R.id.newStory);
         storyTitle.setText(StoryName);
 
         /*findViewById(R.id.character_fragment_id).setVisibility(View.INVISIBLE);

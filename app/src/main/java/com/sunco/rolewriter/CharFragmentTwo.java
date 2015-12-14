@@ -105,46 +105,69 @@ public class CharFragmentTwo extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String interests = "";
-                List<CharacterClass> charList = appDB.getAllChars(storyName);
-                for (CharacterClass c : charList) {
-                    String charN = c.getCharName();
-                    if (charStr.equalsIgnoreCase(charN)) {
-                        String hardw = getHardw();
-                        String happy = getHappy();
-                        String smart = getSmart();
-                        String polite = getPolite();
-                        String selfish = getSelfish();
-                        String quiet = getQuiet();
-                        String brave = getBrave();
-                        String calm = getCalm();
+                if(hardw.getCheckedRadioButtonId() == -1 || happy.getCheckedRadioButtonId() == -1 ||
+                        smart.getCheckedRadioButtonId() == -1 || polite.getCheckedRadioButtonId() == -1 ||
+                        selfish.getCheckedRadioButtonId() == -1 || quiet.getCheckedRadioButtonId() == -1 ||
+                        brave.getCheckedRadioButtonId() == -1 || calm.getCheckedRadioButtonId() == -1) {
 
-                        c.setHardwork(hardw);
-                        c.setHappy(happy);
-                        c.setSmart(smart);
-                        c.setPolite(polite);
-                        c.setSelfish(selfish);
-                        c.setQuiet(quiet);
-                        c.setBrave(brave);
-                        c.setCalm(calm);
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    break;
+                            }
+                        }
+                    };
+                    // Confirmation prompt
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder.setMessage("One or more of the require fields are empty!").setPositiveButton("Cancel", dialogClickListener)
+                            .show();
 
-                        interests = c.getInterests();
-
-                        appDB.updateChar(c);
-                    }
                 }
 
-                String charTxt = charName.getText().toString();
+                else{
+                    String interests = "";
+                    List<CharacterClass> charList = appDB.getAllChars(storyName);
+                    for (CharacterClass c : charList) {
+                        String charN = c.getCharName();
+                        if (charStr.equalsIgnoreCase(charN)) {
+                            String hardw = getHardw();
+                            String happy = getHappy();
+                            String smart = getSmart();
+                            String polite = getPolite();
+                            String selfish = getSelfish();
+                            String quiet = getQuiet();
+                            String brave = getBrave();
+                            String calm = getCalm();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("charKey",charTxt);
-                bundle.putString("storyKey",storyName);
-                bundle.putString("intsKey",interests);
-                CharFragmentThree charFragmentThree = new CharFragmentThree();
-                charFragmentThree.setArguments(bundle);
-                getFragmentManager().beginTransaction().replace(R.id.character_fragment_id, charFragmentThree)
-                        .addToBackStack(null)
-                        .commit();
+                            c.setHardwork(hardw);
+                            c.setHappy(happy);
+                            c.setSmart(smart);
+                            c.setPolite(polite);
+                            c.setSelfish(selfish);
+                            c.setQuiet(quiet);
+                            c.setBrave(brave);
+                            c.setCalm(calm);
+
+                            interests = c.getInterests();
+
+                            appDB.updateChar(c);
+                        }
+                    }
+
+                    String charTxt = charName.getText().toString();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("charKey",charTxt);
+                    bundle.putString("storyKey",storyName);
+                    bundle.putString("intsKey",interests);
+                    CharFragmentThree charFragmentThree = new CharFragmentThree();
+                    charFragmentThree.setArguments(bundle);
+                    getFragmentManager().beginTransaction().replace(R.id.character_fragment_id, charFragmentThree)
+                            .addToBackStack(null)
+                            .commit();
+                }
             }
         });
 

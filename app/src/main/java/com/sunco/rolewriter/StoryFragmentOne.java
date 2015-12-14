@@ -37,7 +37,7 @@ public class StoryFragmentOne extends Fragment {
     RadioButton classiBtn;
     FrameLayout listFrag;
     DBHandler appDB = DBHandler.getInstance(getContext());
-    String[] stories;
+    EditText summary;
 
 
     public View onCreateView(LayoutInflater inflater,
@@ -55,6 +55,7 @@ public class StoryFragmentOne extends Fragment {
         ageGroup = (RadioGroup) storyview.findViewById(R.id.age_radio_group);
         classiGroup = (RadioGroup) storyview.findViewById(R.id.classification_radio_group);
         listFrag = (FrameLayout) baseview.findViewById(R.id.story_fragment_id);
+        summary = (EditText) storyview.findViewById(R.id.synopsis_edit_text);
 
         final TextView[] genreIcons = {(TextView) storyview.findViewById(R.id.action_button),
                 (TextView) storyview.findViewById(R.id.bio_button),
@@ -171,7 +172,8 @@ public class StoryFragmentOne extends Fragment {
                     if(genreStr.equalsIgnoreCase("[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]") ||
                             storyTitle.getText().toString().equalsIgnoreCase("") ||
                             ageGroup.getCheckedRadioButtonId() == -1 ||
-                            classiGroup.getCheckedRadioButtonId() == -1)
+                            classiGroup.getCheckedRadioButtonId() == -1 ||
+                            summary.getText().toString().equalsIgnoreCase(""))
                     {
                         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                             @Override
@@ -193,7 +195,8 @@ public class StoryFragmentOne extends Fragment {
                         String ageStr = getAge();
                         String classiStr = getClassi();
                         String newTitle = storyTitle.getText().toString();
-                        appDB.addStory(new StoryClass(newTitle, genreStr, ageStr, classiStr));
+                        String sumStr = summary.getText().toString();
+                        appDB.addStory(new StoryClass(newTitle, genreStr, ageStr, classiStr, sumStr,""));
                         populateListView(listFrag);
                         getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
                         Log.v("taggy","genreStr saved: " + genreStr);
@@ -247,6 +250,7 @@ public class StoryFragmentOne extends Fragment {
             scifiGLoad(storyview);
             thrillerGLoad(storyview);
 
+            summary.setText(getArguments().getString("sumKey"));
 
             saveBtn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -265,19 +269,18 @@ public class StoryFragmentOne extends Fragment {
                             String genreStr = Arrays.toString(genreTags);
                             strToArr(genreStr);
                             s.setAge(ageStr);
-                            Log.v("taggy", "age before: " + s.getAge());
-                            Log.v("taggy", "age after: " + ageStr);
                             s.setClassi(classiStr);
-                            Log.v("taggy", "age before: " + s.getClassi());
-                            Log.v("taggy", "age after: " + classiStr);
                             s.setGenre(genreStr);
                             String newTitle = storyTitle.getText().toString();
                             s.setTitle(newTitle);
+                            s.setSummary(summary.getText().toString());
+
                             appDB.updateStory(s);
                         }
                     }
                     populateListView(listFrag);
                     baseview.findViewById(R.id.story_list_id).setVisibility(View.VISIBLE);
+                    getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
 
                 }
             });

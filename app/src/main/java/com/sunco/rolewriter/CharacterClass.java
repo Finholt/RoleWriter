@@ -28,13 +28,14 @@ public class CharacterClass {
     String _brave;
     String _calm;
     String _interests;
+    String _notes;
 
     public CharacterClass(){}
 
     public CharacterClass(int id, String storyname, String name, String direction, String gender, String age, String location,
                           String occupation, String income, String height, String weight, String eyeC, String hairC,
                           String nation, String hardwork, String happy, String smart, String polite, String selfish,
-                          String quiet, String brave, String calm, String interests){
+                          String quiet, String brave, String calm, String interests, String notes){
         this._id = id;
         this._storyname = storyname;
         this._name = name;
@@ -58,12 +59,13 @@ public class CharacterClass {
         this._brave = brave;
         this._calm = calm;
         this._interests = interests;
+        this._notes = notes;
     }
 
     public CharacterClass(String storyname, String name, String direction, String gender, String age, String location,
                           String occupation, String income, String height, String weight, String eyeC, String hairC,
                           String nation, String hardwork, String happy, String smart, String polite, String selfish,
-                          String quiet, String brave, String calm, String interests){
+                          String quiet, String brave, String calm, String interests, String notes){
         this._storyname = storyname;
         this._name = name;
         this._direction = direction;
@@ -86,6 +88,7 @@ public class CharacterClass {
         this._brave = brave;
         this._calm = calm;
         this._interests = interests;
+        this._notes = notes;
     }
 
     public int getID(){
@@ -257,6 +260,14 @@ public class CharacterClass {
     }
     public void setInterests(String s){
         this._interests = s;
+    }
+
+    public String getNotes() {
+        return this._notes;
+    }
+
+    public void setNotes(String s){
+        this._notes = s;
     }
 
 }

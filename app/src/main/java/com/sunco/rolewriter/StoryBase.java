@@ -54,8 +54,8 @@ public class StoryBase extends AppCompatActivity {
 
         if(firstTime.equalsIgnoreCase("true")){
 
-            appDB.addStory(new StoryClass("Harry Potter","[2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1]","Young Adult","Fiction"));
-            appDB.addStory(new StoryClass("Wowl Witer: The Biwogwaphy", "[2, 2, 2, 2, 1, 1, 1, 2, 1, 1, 2]", "Adult", "Non-Fiction"));
+            appDB.addStory(new StoryClass("Harry Potter","[2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1]","Young Adult","Fiction","MAGIC ALL DAY ERR DAY",""));
+            appDB.addStory(new StoryClass("Wowl Witer: The Biwogwaphy", "[2, 2, 2, 2, 1, 1, 1, 2, 1, 1, 2]", "Adult", "Non-Fiction","IS DIS THE REAL LAIF?",""));
 
             SharedPreferences.Editor editor = sharePref.edit();
             editor.putString(getString(R.string.first_time_key), "false");
@@ -82,8 +82,6 @@ public class StoryBase extends AppCompatActivity {
             storyListFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().add(R.id.story_list_id, storyListFragment).commit();
         }
-
-        //registerClickCallback();
     }
 
     private void registerClickCallback() {
@@ -201,6 +199,7 @@ public class StoryBase extends AppCompatActivity {
         String ageG = "2131492993";
         String classi = "2131492998";
         String genre = "";
+        String summary = "";
 
         List<StoryClass> storyList = appDB.getAllStories();
         for (StoryClass s : storyList) {
@@ -209,6 +208,7 @@ public class StoryBase extends AppCompatActivity {
                 ageG = s.getAge();
                 classi = s.getClassi();
                 genre = s.getGenre();
+                summary = s.getSummary();
             }
         }
 
@@ -218,6 +218,7 @@ public class StoryBase extends AppCompatActivity {
             bundle.putString("ageKey", ageG);
             bundle.putString("classiKey", classi);
             bundle.putString("genreKey", genre);
+            bundle.putString("sumKey",summary);
             StoryFragmentOne oldFrag = new StoryFragmentOne();
             oldFrag.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()

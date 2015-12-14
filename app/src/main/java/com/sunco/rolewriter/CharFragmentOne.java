@@ -133,25 +133,49 @@ public class CharFragmentOne extends Fragment{
                     String cHairc = hairC.getText().toString();
                     String cNation = nation.getText().toString();
 
-                    String cDirection = getDir();
-                    String cGender = getGend();
-                    String cIncome = getInc();
+                    if(newChar.equalsIgnoreCase("") || cAge.equalsIgnoreCase("")|| cLoc.equalsIgnoreCase("")
+                            || cOcc.equalsIgnoreCase("") || cHeight.equalsIgnoreCase("") || cWeight.equalsIgnoreCase("")
+                            || cEyeC.equalsIgnoreCase("") || cHairc.equalsIgnoreCase("") || cNation.equalsIgnoreCase("")
+                            || direction.getCheckedRadioButtonId() == -1 || gender.getCheckedRadioButtonId() == -1
+                            || income.getCheckedRadioButtonId() == -1) {
 
-                    appDB.addChar(new CharacterClass(storyName, newChar, cDirection, cGender, cAge, cLoc, cOcc, cIncome,
-                            cHeight, cWeight, cEyeC, cHairc, cNation, "", "", "", "", "", "", "", "", ""));
+                        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which) {
+                                    case DialogInterface.BUTTON_POSITIVE:
+                                        break;
+                                }
+                            }
+                        };
+                        // Confirmation prompt
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        builder.setMessage("One or more of the require fields are empty!").setPositiveButton("Cancel", dialogClickListener)
+                                .show();
 
-                    Log.v("taggy", newChar);
+                    }
+                    else{
+                        String cDirection = getDir();
+                        String cGender = getGend();
+                        String cIncome = getInc();
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("charKey",newChar);
-                    bundle.putString("storyKey",storyName);
-                    bundle.putString("newKey","new");
-                    CharFragmentTwo charFragmentTwo = new CharFragmentTwo();
-                    charFragmentTwo.setArguments(bundle);
-                    getFragmentManager().beginTransaction().replace(R.id.character_fragment_id,charFragmentTwo)
-                            .addToBackStack(null)
-                            .commit();
+                        appDB.addChar(new CharacterClass(storyName, newChar, cDirection, cGender, cAge, cLoc, cOcc, cIncome,
+                                cHeight, cWeight, cEyeC, cHairc, cNation, "", "", "", "", "", "", "", "", "", ""));
+
+                        Log.v("taggy", newChar);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("charKey", newChar);
+                        bundle.putString("storyKey", storyName);
+                        bundle.putString("newKey", "new");
+                        CharFragmentTwo charFragmentTwo = new CharFragmentTwo();
+                        charFragmentTwo.setArguments(bundle);
+                        getFragmentManager().beginTransaction().replace(R.id.character_fragment_id, charFragmentTwo)
+                                .addToBackStack(null)
+                                .commit();
+                    }
                 }
+
             });
             // done adding new char.
         }

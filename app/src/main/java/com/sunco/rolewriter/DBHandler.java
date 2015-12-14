@@ -31,6 +31,8 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COL_GENRE = "genre";
     private static final String COL_AGERANGE = "agerange";
     private static final String COL_CLASSIFICATION = "classification";
+    private static final String COL_SUMMARY = "summary";
+    private static final String COL_SNOTES = "snotes";
 
     //Characters Table Column names
     private static final String COL_CID = "cid";
@@ -56,6 +58,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COL_BRAVE = "brave";
     private static final String COL_CALM = "calm";
     private static final String COL_INTERESTS = "interests";
+    private static final String COL_CNOTES = "cnotes";
 
     public static synchronized DBHandler getInstance(Context context){
         if (sInstance == null){
@@ -75,7 +78,9 @@ public class DBHandler extends SQLiteOpenHelper {
                 + COL_SID + " INTEGER PRIMARY KEY," + COL_TITLE + " TEXT,"
                 + COL_GENRE + " TEXT,"
                 + COL_AGERANGE + " TEXT,"
-                + COL_CLASSIFICATION + " TEXT"
+                + COL_CLASSIFICATION + " TEXT,"
+                + COL_SUMMARY + " TEXT,"
+                + COL_SNOTES + " TEXT"
                 + ")";
 
         String CREATE_CHAR_TABLE = "CREATE TABLE " + CHAR_TABLE + "("
@@ -100,7 +105,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 + COL_QUIET+ " TEXT,"
                 + COL_BRAVE+ " TEXT,"
                 + COL_CALM+ " TEXT,"
-                + COL_INTERESTS + " TEXT"
+                + COL_INTERESTS + " TEXT,"
+                + COL_CNOTES + " TEXT"
                 + ")";
         db.execSQL(CREATE_STORIES_TABLE);
         db.execSQL(CREATE_CHAR_TABLE);
@@ -126,6 +132,8 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COL_GENRE, story.getGenre());
         values.put(COL_AGERANGE, story.getAge());
         values.put(COL_CLASSIFICATION, story.getClassi());
+        values.put(COL_SUMMARY, story.getSummary());
+        values.put(COL_SNOTES, story.getNotes());
 
         // Inserting Row
         db.insert(STORIES_TABLE, null, values);
@@ -157,6 +165,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COL_BRAVE, characterClass.getBrave());
         values.put(COL_CALM, characterClass.getCalm());
         values.put(COL_INTERESTS, characterClass.getInterests());
+        values.put(COL_CNOTES, characterClass.getNotes());
 
         // Inserting Row
         db.insert(CHAR_TABLE, null, values);
@@ -180,6 +189,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 story.setGenre(cursor.getString(2));
                 story.setAge(cursor.getString(3));
                 story.setClassi(cursor.getString(4));
+                story.setSummary(cursor.getString(5));
+                story.setNotes(cursor.getString(6));
                 // Adding joke to list
                 storyList.add(story);
             } while (cursor.moveToNext());
@@ -227,6 +238,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 newChar.setBrave(cursor.getString(20));
                 newChar.setCalm(cursor.getString(21));
                 newChar.setInterests(cursor.getString(22));
+                newChar.setNotes(cursor.getString(23));
                 // Adding joke to list
                 characterList.add(newChar);
             } while (cursor.moveToNext());
@@ -269,6 +281,8 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COL_GENRE, story.getGenre());
         values.put(COL_AGERANGE, story.getAge());
         values.put(COL_CLASSIFICATION, story.getClassi());
+        values.put(COL_SUMMARY, story.getSummary());
+        values.put(COL_SNOTES, story.getNotes());
 
         // updating row
         return db.update(STORIES_TABLE, values, COL_SID + " = ?",
@@ -301,6 +315,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COL_BRAVE, characterClass.getBrave());
         values.put(COL_CALM, characterClass.getCalm());
         values.put(COL_INTERESTS, characterClass.getInterests());
+        values.put(COL_CNOTES, characterClass.getNotes());
 
         // updating row
         return db.update(CHAR_TABLE, values, COL_CID + " = ?",
