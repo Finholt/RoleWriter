@@ -1,5 +1,7 @@
 package com.sunco.rolewriter;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -147,9 +149,46 @@ public class CharacterBase extends AppCompatActivity {
             bundle.putString("weightKey",weight);
             bundle.putString("eyeKey",eyec);
             bundle.putString("hairKey",hairc);
-            bundle.putString("nationKey",nation);
+            bundle.putString("nationKey", nation);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.character_fragment_id, oldFrag).commit();
         }
+    }
+
+    public void DelCharacter(View view) {
+        RelativeLayout relLay = (RelativeLayout) view.getParent();
+        final TextView textView = (TextView) relLay.findViewById(R.id.character_name);
+
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        List<CharacterClass> charList = appDB.getAllChars(StoryName);
+                        for (CharacterClass c : charList) {
+                            String charN = c.getCharName();
+                            if (textView.getText().toString().equalsIgnoreCase(charN)) {
+                                appDB.deleteChar(c);
+                            }
+                        }
+                        if (findViewById(R.id.character_list_id) != null) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("charKey", "");
+                            bundle.putString("storyKey", StoryName);
+                            CharacterList characterListFragment = new CharacterList();
+                            characterListFragment.setArguments(bundle);
+                            getSupportFragmentManager().beginTransaction().replace(R.id.character_list_id, characterListFragment).commit();
+                        }
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            }
+        };
+        // Confirmation prompt
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to delete this character?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
     }
 }

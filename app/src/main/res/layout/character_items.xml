@@ -49,6 +49,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:onClick="DelCharacter"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:id="@+id/delete_button_char"/>
