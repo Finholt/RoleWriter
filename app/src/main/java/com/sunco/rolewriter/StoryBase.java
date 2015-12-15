@@ -14,7 +14,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -256,5 +258,14 @@ public class StoryBase extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.story_fragment_id, storyNotesFragment).commit();
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //Hides keyboard when touching away from EditText field
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+                INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
     }
 }

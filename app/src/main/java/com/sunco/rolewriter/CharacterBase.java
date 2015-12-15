@@ -1,12 +1,15 @@
 package com.sunco.rolewriter;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -196,5 +199,14 @@ public class CharacterBase extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.character_fragment_id, charNotesFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //Hides keyboard when touching away from EditText field
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+                INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
     }
 }
