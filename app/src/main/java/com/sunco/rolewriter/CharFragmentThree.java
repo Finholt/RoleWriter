@@ -113,6 +113,7 @@ public class CharFragmentThree extends Fragment {
                 (TextView) charview.findViewById(R.id.swimming_button),
                 (TextView) charview.findViewById(R.id.gaming_button)};
 
+        //for loop to set onClickListener for all buttons in order to toggle between selected or unselected
         for (int i = 0; i<interestsIcons.length; i++)
         {
             interestsIcons[i].setOnClickListener(new View.OnClickListener()
@@ -339,6 +340,7 @@ public class CharFragmentThree extends Fragment {
         return result;
     }
 
+    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void sportsG() {
         if (Integer.parseInt(getView().findViewById(R.id.sports_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.sports_button).setBackgroundResource(R.drawable.sports_selected);
@@ -349,6 +351,7 @@ public class CharFragmentThree extends Fragment {
         }
 
     }
+    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void runningG() {
         if (Integer.parseInt(getView().findViewById(R.id.running_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.running_button).setBackgroundResource(R.drawable.running_selected);
@@ -358,7 +361,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.running_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void yogaG() {
         if (Integer.parseInt(getView().findViewById(R.id.yoga_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.yoga_button).setBackgroundResource(R.drawable.yoga_selected);
@@ -368,7 +371,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.yoga_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void musicG() {
         if (Integer.parseInt(getView().findViewById(R.id.music_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.music_button).setBackgroundResource(R.drawable.music_selected);
@@ -378,7 +381,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.music_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void writingG() {
         if (Integer.parseInt(getView().findViewById(R.id.writing_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.writing_button).setBackgroundResource(R.drawable.writing_selected);
@@ -388,7 +391,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.writing_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void readingG() {
         if (Integer.parseInt(getView().findViewById(R.id.reading_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.reading_button).setBackgroundResource(R.drawable.reading_selected);
@@ -398,7 +401,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.reading_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void photographyG() {
         if (Integer.parseInt(getView().findViewById(R.id.photography_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.photography_button).setBackgroundResource(R.drawable.photography_selected);
@@ -408,7 +411,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.photography_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void artG() {
         if (Integer.parseInt(getView().findViewById(R.id.art_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.art_button).setBackgroundResource(R.drawable.art_selected);
@@ -418,7 +421,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.art_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void foodG() {
         if (Integer.parseInt(getView().findViewById(R.id.food_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.food_button).setBackgroundResource(R.drawable.food_selected);
@@ -428,7 +431,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.food_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void relaxG() {
         if (Integer.parseInt(getView().findViewById(R.id.relaxing_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.relaxing_button).setBackgroundResource(R.drawable.relaxing_selected);
@@ -438,7 +441,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.relaxing_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void hikingG() {
         if (Integer.parseInt(getView().findViewById(R.id.hiking_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.hiking_button).setBackgroundResource(R.drawable.hiking_selected);
@@ -448,7 +451,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.hiking_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void campingG() {
         if (Integer.parseInt(getView().findViewById(R.id.camping_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.camping_button).setBackgroundResource(R.drawable.camping_selected);
@@ -458,7 +461,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.camping_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void travelG() {
         if (Integer.parseInt(getView().findViewById(R.id.travel_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.travel_button).setBackgroundResource(R.drawable.flying_selected);
@@ -468,7 +471,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.travel_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void dancingG() {
         if (Integer.parseInt(getView().findViewById(R.id.dancing_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.dancing_button).setBackgroundResource(R.drawable.dancing_selected);
@@ -478,7 +481,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.dancing_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void cookingG() {
         if (Integer.parseInt(getView().findViewById(R.id.cooking_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.cooking_button).setBackgroundResource(R.drawable.cooking_selected);
@@ -488,7 +491,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.cooking_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void bakingG() {
         if (Integer.parseInt(getView().findViewById(R.id.baking_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.baking_button).setBackgroundResource(R.drawable.baking_selected);
@@ -498,7 +501,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.baking_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void craftG() {
         if (Integer.parseInt(getView().findViewById(R.id.craft_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.craft_button).setBackgroundResource(R.drawable.crafting_selected);
@@ -508,7 +511,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.craft_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void gardeningG() {
         if (Integer.parseInt(getView().findViewById(R.id.gardening_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.gardening_button).setBackgroundResource(R.drawable.gardening_selected);
@@ -518,7 +521,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.gardening_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void huntingG() {
         if (Integer.parseInt(getView().findViewById(R.id.hunting_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.hunting_button).setBackgroundResource(R.drawable.hunting_selected);
@@ -528,7 +531,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.hunting_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void learningG() {
         if (Integer.parseInt(getView().findViewById(R.id.learning_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.learning_button).setBackgroundResource(R.drawable.learning_selected);
@@ -538,7 +541,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.learning_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void socialG() {
         if (Integer.parseInt(getView().findViewById(R.id.social_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.social_button).setBackgroundResource(R.drawable.socializing_selected);
@@ -548,7 +551,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.social_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void sleepingG() {
         if (Integer.parseInt(getView().findViewById(R.id.sleeping_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.sleeping_button).setBackgroundResource(R.drawable.sleeping_selected);
@@ -558,7 +561,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.sleeping_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void carsG() {
         if (Integer.parseInt(getView().findViewById(R.id.cars_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.cars_button).setBackgroundResource(R.drawable.cars_selected);
@@ -568,7 +571,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.cars_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void swimmingG() {
         if (Integer.parseInt(getView().findViewById(R.id.swimming_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.swimming_button).setBackgroundResource(R.drawable.swimming_selected);
@@ -578,7 +581,7 @@ public class CharFragmentThree extends Fragment {
             getView().findViewById(R.id.swimming_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void gamingG() {
         if (Integer.parseInt(getView().findViewById(R.id.gaming_button).getTag().toString()) == 1) {
             getView().findViewById(R.id.gaming_button).setBackgroundResource(R.drawable.gaming_selected);

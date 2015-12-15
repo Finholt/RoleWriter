@@ -130,7 +130,7 @@ public class StoryBase extends AppCompatActivity {
     }
 
     public void onClick(View v)
-    {
+    {   //add button makes story fragment appear to edit the details about the story
         switch (v.getId()) {
             case R.id.AddButton:
 
@@ -146,7 +146,7 @@ public class StoryBase extends AppCompatActivity {
                 break;
         }
     }
-
+    // function to show fragment and toggle it to appear disappear
     public void showView()
     {
         if (findViewById(R.id.story_fragment_id).getVisibility() == View.INVISIBLE)

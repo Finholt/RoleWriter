@@ -71,6 +71,7 @@ public class StoryFragmentOne extends Fragment {
                 (TextView) storyview.findViewById(R.id.scifi_button),
                 (TextView) storyview.findViewById(R.id.thriller_button)};
 
+        //for loop enables onClickListener for all icons, switch statement to toggle genre buttons between selected or unselected
         for (int i =0; i<11; i++){
             genreIcons[i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -435,7 +436,7 @@ public class StoryFragmentOne extends Fragment {
             getFragmentManager().beginTransaction().replace(R.id.story_list_id, storyListFragment).commit();
         }
     }
-
+    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void storyAttributes()
     {
         if (Integer.parseInt(getView().findViewById(R.id.action_button).getTag().toString()) == 1)
@@ -450,7 +451,7 @@ public class StoryFragmentOne extends Fragment {
         }
 
     }
-
+    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void bioG(){
         if (Integer.parseInt(getView().findViewById(R.id.bio_button).getTag().toString()) == 1)
         {
@@ -464,7 +465,7 @@ public class StoryFragmentOne extends Fragment {
         }
 
     }
-
+    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void comedyG(){
         if (Integer.parseInt(getView().findViewById(R.id.comedy_button).getTag().toString()) == 1)
         {
@@ -478,7 +479,7 @@ public class StoryFragmentOne extends Fragment {
         }
 
     }
-
+    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void dramaG(){
         if (Integer.parseInt(getView().findViewById(R.id.drama_button).getTag().toString()) == 1)
         {
@@ -492,7 +493,7 @@ public class StoryFragmentOne extends Fragment {
         }
 
     }
-
+    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void fantasyG(){
         if (Integer.parseInt(getView().findViewById(R.id.fantasy_button).getTag().toString()) == 1)
         {
@@ -506,7 +507,7 @@ public class StoryFragmentOne extends Fragment {
         }
 
     }
-
+    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void horrorG(){
         if (Integer.parseInt(getView().findViewById(R.id.horror_button).getTag().toString()) == 1)
         {
@@ -520,7 +521,7 @@ public class StoryFragmentOne extends Fragment {
         }
 
     }
-
+    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void historyG(){
         if (Integer.parseInt(getView().findViewById(R.id.history_button).getTag().toString()) == 1)
         {
@@ -533,7 +534,7 @@ public class StoryFragmentOne extends Fragment {
             getView().findViewById(R.id.history_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void mysteryG(){
         if (Integer.parseInt(getView().findViewById(R.id.mystery_button).getTag().toString()) == 1)
         {
@@ -546,7 +547,7 @@ public class StoryFragmentOne extends Fragment {
             getView().findViewById(R.id.mystery_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void romanceG(){
         if (Integer.parseInt(getView().findViewById(R.id.romance_button).getTag().toString()) == 1)
         {
@@ -559,7 +560,7 @@ public class StoryFragmentOne extends Fragment {
             getView().findViewById(R.id.romance_button).setTag(1);
         }
 
-    }
+    }    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void scifiG(){
         if (Integer.parseInt(getView().findViewById(R.id.scifi_button).getTag().toString()) == 1)
         {
@@ -573,7 +574,7 @@ public class StoryFragmentOne extends Fragment {
         }
 
     }
-
+    //Function flips the button between selected or unselected by applying a tag on .xml file
     public void thrillerG(){
         if (Integer.parseInt(getView().findViewById(R.id.thriller_button).getTag().toString()) == 1)
         {
