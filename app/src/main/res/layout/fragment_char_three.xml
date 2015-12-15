@@ -57,6 +57,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/exit_button"
+            android:inputType="textCapWords|textNoSuggestions"
+            android:imeOptions="actionDone"
             android:layout_marginTop="100dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             />

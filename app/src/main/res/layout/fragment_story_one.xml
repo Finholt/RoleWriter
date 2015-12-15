@@ -60,6 +60,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/exit_button"
+            android:inputType="textCapWords|textNoSuggestions"
+            android:imeOptions="actionDone"
             android:layout_marginTop="100dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             />
@@ -75,6 +77,8 @@
             android:id="@+id/synopsis_edit_text"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:inputType="textCapSentences|textAutoComplete"
+            android:imeOptions="actionDone"
             android:layout_alignTop="@+id/synopsis_id"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"

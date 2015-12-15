@@ -60,6 +60,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/exit_button"
+            android:inputType="textCapWords|textNoSuggestions"
+            android:imeOptions="actionDone"
             android:layout_marginTop="100dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             />
@@ -77,6 +79,9 @@
             android:layout_height="wrap_content"
             android:hint="@string/edit_notes"
             android:layout_alignTop="@+id/notes_id"
+            android:lines="10"
+            android:inputType="textAutoCorrect|textCapSentences|textMultiLine"
+            android:gravity="top"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             />
