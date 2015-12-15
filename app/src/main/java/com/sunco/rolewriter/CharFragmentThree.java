@@ -26,6 +26,7 @@ public class CharFragmentThree extends Fragment {
     Button saveBtn;
     EditText charName;
     FrameLayout listFrag;
+    ImageView saveIc;
 
     DBHandler appDB = DBHandler.getInstance(getContext());
 
@@ -44,6 +45,7 @@ public class CharFragmentThree extends Fragment {
         charName = (EditText) charview.findViewById(R.id.char_three_input);
         charName.setText(charStr);
         saveBtn = (Button) charview.findViewById(R.id.char_three_save_btn);
+        saveIc = (ImageView) charview.findViewById(R.id.save_button);
         listFrag = (FrameLayout) baseview.findViewById(R.id.character_fragment_id);
         
         ImageView closeEdit = (ImageView) charview.findViewById(R.id.exit_button);
@@ -241,7 +243,7 @@ public class CharFragmentThree extends Fragment {
             @Override
             public void onClick(View v) {
 
-
+                String notes = "";
 
                 String[] interestTags = new String[25];
                 for (int i =0; i<25; i++){
@@ -257,6 +259,8 @@ public class CharFragmentThree extends Fragment {
                         if (charStr.equalsIgnoreCase(charN)) {
                             c.setInterests(genreStr);
 
+                            notes = c.getNotes();
+
                             appDB.updateChar(c);
 
                         }
@@ -267,6 +271,7 @@ public class CharFragmentThree extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("charKey",charTxt);
                 bundle.putString("storyKey",storyName);
+                bundle.putString("notesKey",notes);
                 CharNotesFragment charNotesFragment = new CharNotesFragment();
                 charNotesFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.character_fragment_id, charNotesFragment)
@@ -281,6 +286,36 @@ public class CharFragmentThree extends Fragment {
 
             }
         });
+
+        saveIc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String notes = "";
+
+                String[] interestTags = new String[25];
+                for (int i =0; i<25; i++){
+                    interestTags[i] = interestsIcons[i].getTag().toString();
+                }
+
+                String genreStr = Arrays.toString(interestTags);
+                strToArr(genreStr);
+
+                List<CharacterClass> charList = appDB.getAllChars(storyName);
+                for (CharacterClass c : charList) {
+                    String charN = c.getCharName();
+                    if (charStr.equalsIgnoreCase(charN)) {
+                        c.setInterests(genreStr);
+
+                        notes = c.getNotes();
+
+                        appDB.updateChar(c);
+
+                    }
+                }
+            }
+        });
+
         return charview;
     }
 

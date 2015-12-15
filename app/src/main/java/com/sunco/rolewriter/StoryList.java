@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * Created by Connor on 12/8/2015.
+ * 
  */
 public class StoryList extends Fragment {
     // declare class variables
@@ -57,6 +58,13 @@ public class StoryList extends Fragment {
         for (StoryClass s : stories) {
             storyname[i] = s.getTitle();
             i++;
+        }
+
+        int midPt = storyname.length /2;
+        for (int j = 0; j<midPt; j++){
+            String temp = storyname[j];
+            storyname[j] = storyname[storyname.length-j-1];
+            storyname[storyname.length-j-1] = temp;
         }
 
         StoryAdapter adapter = new StoryAdapter(this.getActivity(), storyname);

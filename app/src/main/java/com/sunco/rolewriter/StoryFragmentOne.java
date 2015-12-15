@@ -157,7 +157,7 @@ public class StoryFragmentOne extends Fragment {
         storyTitle.setText(titleTxt);
 
         // titleTxt is only empty if it's a new story, after pressing the '+' button
-        if(titleTxt.equalsIgnoreCase("")){
+        if(storyTitle.getText().toString().equalsIgnoreCase("")){
             saveBtn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
@@ -256,14 +256,8 @@ public class StoryFragmentOne extends Fragment {
                         String sumStr = summary.getText().toString();
                         appDB.addStory(new StoryClass(newTitle, genreStr, ageStr, classiStr, sumStr, ""));
                         populateListView(listFrag);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("titleKey",newTitle);
-                        bundle.putString("notesKey","");
-                        StoryNotesFragment storyNotesFragment = new StoryNotesFragment();
-                        storyNotesFragment.setArguments(bundle);
-                        getFragmentManager().beginTransaction().replace(R.id.story_fragment_id, storyNotesFragment)
-                                .addToBackStack(null)
-                                .commit();
+
+                        storyTitle.setText(newTitle);
 
                         //getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
                     }

@@ -171,6 +171,65 @@ public class CharFragmentTwo extends Fragment {
             }
         });
 
+        ImageView saveIc = (ImageView) charview.findViewById(R.id.save_button);
+        saveIc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(hardw.getCheckedRadioButtonId() == -1 || happy.getCheckedRadioButtonId() == -1 ||
+                        smart.getCheckedRadioButtonId() == -1 || polite.getCheckedRadioButtonId() == -1 ||
+                        selfish.getCheckedRadioButtonId() == -1 || quiet.getCheckedRadioButtonId() == -1 ||
+                        brave.getCheckedRadioButtonId() == -1 || calm.getCheckedRadioButtonId() == -1) {
+
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    break;
+                            }
+                        }
+                    };
+                    // Confirmation prompt
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder.setMessage("One or more of the require fields are empty!").setPositiveButton("Cancel", dialogClickListener)
+                            .show();
+
+                }
+
+                else{
+                    String interests = "";
+                    List<CharacterClass> charList = appDB.getAllChars(storyName);
+                    for (CharacterClass c : charList) {
+                        String charN = c.getCharName();
+                        if (charStr.equalsIgnoreCase(charN)) {
+                            String hardw = getHardw();
+                            String happy = getHappy();
+                            String smart = getSmart();
+                            String polite = getPolite();
+                            String selfish = getSelfish();
+                            String quiet = getQuiet();
+                            String brave = getBrave();
+                            String calm = getCalm();
+
+                            c.setHardwork(hardw);
+                            c.setHappy(happy);
+                            c.setSmart(smart);
+                            c.setPolite(polite);
+                            c.setSelfish(selfish);
+                            c.setQuiet(quiet);
+                            c.setBrave(brave);
+                            c.setCalm(calm);
+
+                            interests = c.getInterests();
+
+                            appDB.updateChar(c);
+                        }
+                    }
+                }
+            }
+        });
+
         return charview;
     }
 

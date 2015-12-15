@@ -98,7 +98,6 @@ public class StoryNotesFragment extends Fragment {
                         appDB.updateStory(s);
                     }
                 }
-                getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
             }
         });
 
@@ -115,6 +114,7 @@ public class StoryNotesFragment extends Fragment {
                         appDB.updateStory(s);
                     }
                 }
+                populateListView(listFrag);
                 getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
             }
         });

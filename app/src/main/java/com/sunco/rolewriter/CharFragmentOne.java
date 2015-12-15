@@ -42,6 +42,7 @@ public class CharFragmentOne extends Fragment{
     EditText hairC;
     EditText nation;
     Button save;
+    ImageView saveIc;
 
     DBHandler appDB = DBHandler.getInstance(getContext());
 
@@ -75,6 +76,7 @@ public class CharFragmentOne extends Fragment{
         charName.setText(charStr);
 
         save = (Button) charview.findViewById(R.id.char_one_save_btn);
+        saveIc = (ImageView) charview.findViewById(R.id.save_button);
 
         ImageView closeEdit = (ImageView) charview.findViewById(R.id.exit_button);
         closeEdit.setOnClickListener(new View.OnClickListener() {
@@ -177,6 +179,55 @@ public class CharFragmentOne extends Fragment{
                 }
 
             });
+
+            saveIc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    String newChar = charName.getText().toString();
+                    String cAge = age.getText().toString();
+                    String cLoc = loc.getText().toString();
+                    String cOcc = occ.getText().toString();
+                    String cHeight = height.getText().toString();
+                    String cWeight = weight.getText().toString();
+                    String cEyeC = eyeC.getText().toString();
+                    String cHairc = hairC.getText().toString();
+                    String cNation = nation.getText().toString();
+
+                    if(newChar.equalsIgnoreCase("") || cAge.equalsIgnoreCase("")|| cLoc.equalsIgnoreCase("")
+                            || cOcc.equalsIgnoreCase("") || cHeight.equalsIgnoreCase("") || cWeight.equalsIgnoreCase("")
+                            || cEyeC.equalsIgnoreCase("") || cHairc.equalsIgnoreCase("") || cNation.equalsIgnoreCase("")
+                            || direction.getCheckedRadioButtonId() == -1 || gender.getCheckedRadioButtonId() == -1
+                            || income.getCheckedRadioButtonId() == -1) {
+
+                        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which) {
+                                    case DialogInterface.BUTTON_POSITIVE:
+                                        break;
+                                }
+                            }
+                        };
+                        // Confirmation prompt
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        builder.setMessage("One or more of the require fields are empty!").setPositiveButton("Cancel", dialogClickListener)
+                                .show();
+
+                    }
+                    else{
+                        String cDirection = getDir();
+                        String cGender = getGend();
+                        String cIncome = getInc();
+
+                        appDB.addChar(new CharacterClass(storyName, newChar, cDirection, cGender, cAge, cLoc, cOcc, cIncome,
+                                cHeight, cWeight, cEyeC, cHairc, cNation, "", "", "", "", "", "", "", "", "", ""));
+
+                        charName.setText(newChar);
+                    }
+                }
+
+            });
             // done adding new char.
         }
         else{
@@ -255,42 +306,94 @@ public class CharFragmentOne extends Fragment{
                             brave = c.getBrave();
                             calm = c.getCalm();
 
-                            Log.v("taggy","brave: " + brave+ " calm: " + calm);
+                            Log.v("taggy", "brave: " + brave + " calm: " + calm);
 
                             appDB.updateChar(c);
                         }
                     }
 
                     Bundle bundle = new Bundle();
-                    bundle.putString("charKey",newChar);
-                    bundle.putString("storyKey",storyName);
-                    bundle.putString("newKey","existing");
-                    bundle.putString("hardKey",hardw);
-                    bundle.putString("happyKey",happy);
-                    bundle.putString("smartKey",smart);
-                    bundle.putString("politeKey",polite);
-                    bundle.putString("selfishKey",selfish);
-                    bundle.putString("quietKey",quiet);
-                    bundle.putString("braveKey",brave);
-                    bundle.putString("calmKey",calm);
-                    Log.v("taggy","brave: " + brave+ " calm: " + calm);
+                    bundle.putString("charKey", newChar);
+                    bundle.putString("storyKey", storyName);
+                    bundle.putString("newKey", "existing");
+                    bundle.putString("hardKey", hardw);
+                    bundle.putString("happyKey", happy);
+                    bundle.putString("smartKey", smart);
+                    bundle.putString("politeKey", polite);
+                    bundle.putString("selfishKey", selfish);
+                    bundle.putString("quietKey", quiet);
+                    bundle.putString("braveKey", brave);
+                    bundle.putString("calmKey", calm);
+                    Log.v("taggy", "brave: " + brave + " calm: " + calm);
 
                     CharFragmentTwo charFragmentTwo = new CharFragmentTwo();
                     charFragmentTwo.setArguments(bundle);
-                    getFragmentManager().beginTransaction().replace(R.id.character_fragment_id,charFragmentTwo)
+                    getFragmentManager().beginTransaction().replace(R.id.character_fragment_id, charFragmentTwo)
                             .addToBackStack(null)
                             .commit();
 
                 }
             });
 
+            saveIc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String newChar = charName.getText().toString();
+                    String cAge = age.getText().toString();
+                    String cLoc = loc.getText().toString();
+                    String cOcc = occ.getText().toString();
+                    String cHeight = height.getText().toString();
+                    String cWeight = weight.getText().toString();
+                    String cEyeC = eyeC.getText().toString();
+                    String cHairc = hairC.getText().toString();
+                    String cNation = nation.getText().toString();
 
+                    String cDirection = getDir();
+                    String cGender = getGend();
+                    String cIncome = getInc();
 
+                    String hardw = "";
+                    String happy = "";
+                    String smart = "";
+                    String polite = "";
+                    String selfish = "";
+                    String quiet = "";
+                    String brave = "";
+                    String calm = "";
+
+                    List<CharacterClass> characterList = appDB.getAllChars(storyName);
+                    for (CharacterClass c : characterList) {
+                        String characterN = c.getCharName();
+                        if (charName.getText().toString().equalsIgnoreCase(characterN)) {
+                            c.setAge(cAge);
+                            c.setLocation(cLoc);
+                            c.setOccupation(cOcc);
+                            c.setHeight(cHeight);
+                            c.setWeight(cWeight);
+                            c.setEyeC(cEyeC);
+                            c.setHairC(cHairc);
+                            c.setNation(cNation);
+                            c.setDirection(cDirection);
+                            c.setGender(cGender);
+                            c.setIncome(cIncome);
+
+                            hardw = c.getHardwork();
+                            happy = c.getHappy();
+                            smart = c.getSmart();
+                            polite = c.getPolite();
+                            selfish = c.getSelfish();
+                            quiet = c.getQuiet();
+                            brave = c.getBrave();
+                            calm = c.getCalm();
+
+                            Log.v("taggy","brave: " + brave+ " calm: " + calm);
+
+                            appDB.updateChar(c);
+                        }
+                    }
+                }
+            });
         }
-
-
-
-
         return charview;
     }
 

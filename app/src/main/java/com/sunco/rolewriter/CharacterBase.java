@@ -200,9 +200,19 @@ public class CharacterBase extends AppCompatActivity {
             findViewById(R.id.character_fragment_id).setVisibility(View.VISIBLE);
         }
 
+        String notes = "";
+        List<CharacterClass> charList = appDB.getAllChars(StoryName);
+        for (CharacterClass c : charList) {
+            String charN = c.getCharName();
+            if (textView.getText().toString().equalsIgnoreCase(charN)) {
+                notes = c.getNotes();
+            }
+        }
+
         Bundle bundle = new Bundle();
         bundle.putString("charKey",textView.getText().toString());
         bundle.putString("storyKey",StoryName);
+        bundle.putString("notesKey", notes);
         CharNotesFragment charNotesFragment = new CharNotesFragment();
         charNotesFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.character_fragment_id, charNotesFragment)
