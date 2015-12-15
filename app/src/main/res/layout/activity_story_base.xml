@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/XLargeText"
-        android:text="My Stories"
+        android:text="@string/MyStor"
         android:textStyle="bold"
         android:id="@+id/storyTitle"
         android:textColor="#ffffff"

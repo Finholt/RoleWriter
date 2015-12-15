@@ -114,5 +114,14 @@
     <string name="title_activity_story_fragment_one">StoryFragmentOne</string>
 
     <string name="title_activity_character_base">CharacterBase</string>
+    <string name="MyChars">My Characters</string>
+    <string name="NewChar">New Character</string>
+    <string name="MyStor">My Stories</string>
+    <string name="Notes">Notes</string>
+    <string name="Delete">Delete</string>
+    <string name="SaveCont">Save and Continue</string>
+    <string name="Deletee">Delete</string>
+    <string name="Notess">Notes</string>
+    <string name="Edit">Edit</string>
 
 </resources>

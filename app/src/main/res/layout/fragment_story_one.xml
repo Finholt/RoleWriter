@@ -409,7 +409,7 @@
             android:background="@null"
             android:textColor="#0085A7"
             android:layout_below="@+id/classification_radio_group"
-            android:text="Save and Continue"
+            android:text="@string/SaveCont"
             android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
