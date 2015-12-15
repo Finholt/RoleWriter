@@ -51,6 +51,7 @@
         <EditText
             android:textStyle="bold"
             android:hint="@string/character_name_input"
+            android:singleLine="true"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
             android:id="@+id/character_edit_text"
@@ -76,6 +77,16 @@
             android:layout_alignTop="@+id/notes_id"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            />
+        <Button
+            android:id="@+id/charSaveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_and_finish_text"
+            android:gravity="center"
+            android:layout_marginTop="520dp"
+            android:layout_marginBottom="40dp"
+            android:layout_centerHorizontal="true"
             />
 
         </RelativeLayout>

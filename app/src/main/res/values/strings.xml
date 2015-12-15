@@ -32,6 +32,7 @@
     <string name="classification_fiction">Fiction</string>
     <string name="classification_non_fiction">Non-Fiction</string>
     <string name="save_and_continue_text">SAVE AND CONTINUE</string>
+    <string name="save_and_finish_text">SAVE AND FINISH</string>
     <string name="action_settings">Settings</string>
 
     <string name="preference_file_key">WR_PREFERENCE_KEY</string>
