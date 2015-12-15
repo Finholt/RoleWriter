@@ -84,16 +84,6 @@
         android:layout_below="@+id/dividerLine"
         />
 
-    <!--<fragment
-        android:layout_width="450dp"
-        android:layout_height="match_parent"
-        android:name="com.example.wesley.gravyt8erots.StoryFragment"
-        android:id="@+id/story_fragment_id"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        tools:layout="@layout/story_fragment" /> -->
-
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
