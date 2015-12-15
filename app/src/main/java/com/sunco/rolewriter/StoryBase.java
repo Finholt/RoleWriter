@@ -277,9 +277,20 @@ public class StoryBase extends AppCompatActivity {
             findViewById(R.id.story_fragment_id).setVisibility(View.VISIBLE);
         }
 
+        String notes = "";
+
+        List<StoryClass> storyList = appDB.getAllStories();
+        for (StoryClass s : storyList) {
+            String storyT = s.getTitle();
+            if (textView.getText().toString().equalsIgnoreCase(storyT)) {
+                notes = s.getNotes();
+            }
+        }
+
         if (findViewById(R.id.story_fragment_id) != null) {
             Bundle bundle = new Bundle();
             bundle.putString("titleKey", textView.getText().toString());
+            bundle.putString("notesKey",notes);
             StoryNotesFragment storyNotesFragment = new StoryNotesFragment();
             storyNotesFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()

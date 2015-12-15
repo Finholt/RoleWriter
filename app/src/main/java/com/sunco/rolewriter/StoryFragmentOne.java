@@ -38,6 +38,7 @@ public class StoryFragmentOne extends Fragment {
     FrameLayout listFrag;
     DBHandler appDB = DBHandler.getInstance(getContext());
     EditText summary;
+    ImageView saveIc;
 
 
     public View onCreateView(LayoutInflater inflater,
@@ -51,6 +52,7 @@ public class StoryFragmentOne extends Fragment {
 
         storyTitle = (EditText) storyview.findViewById(R.id.new_title_edit_text);
         saveBtn = (Button) storyview.findViewById(R.id.storySaveBtn);
+        saveIc = (ImageView) storyview.findViewById(R.id.save_button);
         storyTitle = (EditText) storyview.findViewById(R.id.new_title_edit_text);
         ageGroup = (RadioGroup) storyview.findViewById(R.id.age_radio_group);
         classiGroup = (RadioGroup) storyview.findViewById(R.id.classification_radio_group);
@@ -196,10 +198,74 @@ public class StoryFragmentOne extends Fragment {
                         String classiStr = getClassi();
                         String newTitle = storyTitle.getText().toString();
                         String sumStr = summary.getText().toString();
-                        appDB.addStory(new StoryClass(newTitle, genreStr, ageStr, classiStr, sumStr,""));
+                        appDB.addStory(new StoryClass(newTitle, genreStr, ageStr, classiStr, sumStr, ""));
                         populateListView(listFrag);
-                        getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
-                        Log.v("taggy","genreStr saved: " + genreStr);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("titleKey",newTitle);
+                        bundle.putString("notesKey","");
+                        StoryNotesFragment storyNotesFragment = new StoryNotesFragment();
+                        storyNotesFragment.setArguments(bundle);
+                        getFragmentManager().beginTransaction().replace(R.id.story_fragment_id, storyNotesFragment)
+                                .addToBackStack(null)
+                                .commit();
+
+                        //getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
+                    }
+                }
+            });
+
+            saveIc.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                    String[] genreTags = new String[11];
+                    for (int i =0; i<11; i++){
+                        genreTags[i] = genreIcons[i].getTag().toString();
+                        Log.v("taggy", genreTags[i]);
+                    }
+
+                    String genreStr = Arrays.toString(genreTags);
+                    strToArr(genreStr);
+
+                    //error checking for empty categories
+                    if(genreStr.equalsIgnoreCase("[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]") ||
+                            storyTitle.getText().toString().equalsIgnoreCase("") ||
+                            ageGroup.getCheckedRadioButtonId() == -1 ||
+                            classiGroup.getCheckedRadioButtonId() == -1 ||
+                            summary.getText().toString().equalsIgnoreCase(""))
+                    {
+                        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which) {
+                                    case DialogInterface.BUTTON_POSITIVE:
+                                        break;
+                                }
+                            }
+                        };
+                        // Confirmation prompt
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        builder.setMessage("One or more of the require fields are empty!").setPositiveButton("Cancel", dialogClickListener)
+                                .show();
+                    }
+
+                    else{
+                        // add a new story
+                        String ageStr = getAge();
+                        String classiStr = getClassi();
+                        String newTitle = storyTitle.getText().toString();
+                        String sumStr = summary.getText().toString();
+                        appDB.addStory(new StoryClass(newTitle, genreStr, ageStr, classiStr, sumStr, ""));
+                        populateListView(listFrag);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("titleKey",newTitle);
+                        bundle.putString("notesKey","");
+                        StoryNotesFragment storyNotesFragment = new StoryNotesFragment();
+                        storyNotesFragment.setArguments(bundle);
+                        getFragmentManager().beginTransaction().replace(R.id.story_fragment_id, storyNotesFragment)
+                                .addToBackStack(null)
+                                .commit();
+
+                        //getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
                     }
                 }
             });
@@ -255,6 +321,8 @@ public class StoryFragmentOne extends Fragment {
             saveBtn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
+                    String notes = "";
+
                     String[] genreTags = new String[11];
                     for (int i = 0; i < 11; i++) {
                         genreTags[i] = genreIcons[i].getTag().toString();
@@ -274,13 +342,61 @@ public class StoryFragmentOne extends Fragment {
                             String newTitle = storyTitle.getText().toString();
                             s.setTitle(newTitle);
                             s.setSummary(summary.getText().toString());
+                            notes = s.getNotes();
 
                             appDB.updateStory(s);
                         }
                     }
 
                     Bundle bundle = new Bundle();
-                    bundle.putString("titleKey","");
+                    bundle.putString("titleKey", storyTitle.getText().toString());
+                    bundle.putString("notesKey", notes);
+                    StoryNotesFragment storyNotesFragment = new StoryNotesFragment();
+                    storyNotesFragment.setArguments(bundle);
+                    getFragmentManager().beginTransaction().replace(R.id.story_fragment_id, storyNotesFragment)
+                            .addToBackStack(null)
+                            .commit();
+
+                    //populateListView(listFrag);
+                    //baseview.findViewById(R.id.story_list_id).setVisibility(View.VISIBLE);
+                    //getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
+
+                }
+            });
+
+            saveIc.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                    String notes = "";
+
+                    String[] genreTags = new String[11];
+                    for (int i = 0; i < 11; i++) {
+                        genreTags[i] = genreIcons[i].getTag().toString();
+                    }
+
+                    List<StoryClass> storyList = appDB.getAllStories();
+                    for (StoryClass s : storyList) {
+                        String storyT = s.getTitle();
+                        if (titleTxt.equalsIgnoreCase(storyT)) {
+                            String ageStr = getAge();
+                            String classiStr = getClassi();
+                            String genreStr = Arrays.toString(genreTags);
+                            strToArr(genreStr);
+                            s.setAge(ageStr);
+                            s.setClassi(classiStr);
+                            s.setGenre(genreStr);
+                            String newTitle = storyTitle.getText().toString();
+                            s.setTitle(newTitle);
+                            s.setSummary(summary.getText().toString());
+                            notes = s.getNotes();
+
+                            appDB.updateStory(s);
+                        }
+                    }
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("titleKey",storyTitle.getText().toString());
+                    bundle.putString("notesKey",notes);
                     StoryNotesFragment storyNotesFragment = new StoryNotesFragment();
                     storyNotesFragment.setArguments(bundle);
                     getFragmentManager().beginTransaction().replace(R.id.story_fragment_id, storyNotesFragment)

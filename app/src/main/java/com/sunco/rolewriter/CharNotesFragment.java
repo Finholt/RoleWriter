@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * Created by Connor Finholt on 12/14/2015.
+ *
  */
 public class CharNotesFragment extends Fragment {
     DBHandler appDB = DBHandler.getInstance(getContext());
