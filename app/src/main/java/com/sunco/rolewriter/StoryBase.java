@@ -268,4 +268,17 @@ public class StoryBase extends AppCompatActivity {
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        //Handles the back button differently depending on whether or not the edit fragment is visible
+        if(findViewById(R.id.story_fragment_id).getVisibility() == View.INVISIBLE)
+        {
+            finish();
+        }
+        else
+        {
+            findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
+        }
+    }
 }
