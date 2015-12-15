@@ -99,7 +99,7 @@ public class CharacterBase extends AppCompatActivity {
         if (findViewById(R.id.character_fragment_id).getVisibility() == View.INVISIBLE) {
             findViewById(R.id.character_fragment_id).setVisibility(View.VISIBLE);
         }
-        //TODO: Fix just about everything below this comment.  Use EditStory Method in StoryBase as reference.  Most is based off of Jit's code.
+
         String dir = "";
         String gender = "";
         String age ="";
@@ -190,5 +190,23 @@ public class CharacterBase extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to delete this character?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();
+    }
+
+    public void ShowCharNotes(View view) {
+        RelativeLayout relLay = (RelativeLayout) view.getParent();
+        TextView textView = (TextView) relLay.findViewById(R.id.character_name);
+
+        if (findViewById(R.id.character_fragment_id).getVisibility() == View.INVISIBLE) {
+            findViewById(R.id.character_fragment_id).setVisibility(View.VISIBLE);
+        }
+
+        Bundle bundle = new Bundle();
+        bundle.putString("charKey",textView.getText().toString());
+        bundle.putString("storyKey",StoryName);
+        CharNotesFragment charNotesFragment = new CharNotesFragment();
+        charNotesFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.character_fragment_id, charNotesFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

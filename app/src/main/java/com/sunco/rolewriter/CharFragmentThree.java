@@ -262,9 +262,20 @@ public class CharFragmentThree extends Fragment {
                         }
                     }
 
-                    populateListView(listFrag);
+                String charTxt = charName.getText().toString();
 
-                    getActivity().findViewById(R.id.character_fragment_id).setVisibility(View.INVISIBLE);
+                Bundle bundle = new Bundle();
+                bundle.putString("charKey",charTxt);
+                bundle.putString("storyKey",storyName);
+                CharNotesFragment charNotesFragment = new CharNotesFragment();
+                charNotesFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.character_fragment_id, charNotesFragment)
+                        .addToBackStack(null)
+                        .commit();
+
+                    //populateListView(listFrag);
+
+                    //getActivity().findViewById(R.id.character_fragment_id).setVisibility(View.INVISIBLE);
 
 
 

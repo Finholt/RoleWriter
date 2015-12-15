@@ -268,4 +268,22 @@ public class StoryBase extends AppCompatActivity {
         builder.setMessage("Are you sure you want to delete this story?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();
     }
+
+    public void ShowStoryNotes(View view) {
+        RelativeLayout relLay = (RelativeLayout) view.getParent();
+        final TextView textView = (TextView) relLay.findViewById(R.id.story_name);
+
+        if (findViewById(R.id.story_fragment_id).getVisibility() == View.INVISIBLE) {
+            findViewById(R.id.story_fragment_id).setVisibility(View.VISIBLE);
+        }
+
+        if (findViewById(R.id.story_fragment_id) != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("titleKey", textView.getText().toString());
+            StoryNotesFragment storyNotesFragment = new StoryNotesFragment();
+            storyNotesFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.story_fragment_id, storyNotesFragment).commit();
+        }
+    }
 }

@@ -278,9 +278,18 @@ public class StoryFragmentOne extends Fragment {
                             appDB.updateStory(s);
                         }
                     }
-                    populateListView(listFrag);
-                    baseview.findViewById(R.id.story_list_id).setVisibility(View.VISIBLE);
-                    getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("titleKey","");
+                    StoryNotesFragment storyNotesFragment = new StoryNotesFragment();
+                    storyNotesFragment.setArguments(bundle);
+                    getFragmentManager().beginTransaction().replace(R.id.story_fragment_id, storyNotesFragment)
+                            .addToBackStack(null)
+                            .commit();
+
+                    //populateListView(listFrag);
+                    //baseview.findViewById(R.id.story_list_id).setVisibility(View.VISIBLE);
+                    //getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
 
                 }
             });

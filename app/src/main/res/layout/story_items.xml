@@ -47,6 +47,7 @@
         android:text="Notes"
         android:textSize="20sp"
         android:textColor="#0085A7"
+        android:onClick="ShowStoryNotes"
         android:layout_toStartOf="@+id/right_bar"
         android:layout_toLeftOf="@+id/right_bar"
         android:layout_centerVertical="true"
