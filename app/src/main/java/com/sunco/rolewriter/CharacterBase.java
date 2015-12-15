@@ -37,6 +37,9 @@ public class CharacterBase extends AppCompatActivity {
         TextView storyTitle = (TextView) findViewById(R.id.newStory);
         storyTitle.setText(StoryName);
 
+        //Hides the nonexistent character fragment.  Used for back button functionality.
+        findViewById(R.id.character_fragment_id).setVisibility(View.INVISIBLE);
+
         //Creates the ListView by creating a ListFragment
         findViewById(R.id.character_list_id).setVisibility(View.VISIBLE);
         if (findViewById(R.id.character_list_id) != null) {
@@ -54,6 +57,7 @@ public class CharacterBase extends AppCompatActivity {
         switch (v.getId()) {
             //Creates a new empty character fragment to add a new character
             case R.id.AddButton:
+                findViewById(R.id.character_fragment_id).setVisibility(View.VISIBLE);
                 Bundle bundle = new Bundle();
                 bundle.putString("charKey","");
                 bundle.putString("storyKey",StoryName);
@@ -107,8 +111,9 @@ public class CharacterBase extends AppCompatActivity {
             }
         }
 
-        //Refreshes the ListView
+        //Launches edit character fragment
         if (findViewById(R.id.character_fragment_id) != null) {
+            findViewById(R.id.character_fragment_id).setVisibility(View.VISIBLE);
             Bundle bundle = new Bundle();
             CharFragmentOne oldFrag = new CharFragmentOne();
             oldFrag.setArguments(bundle);
@@ -190,6 +195,7 @@ public class CharacterBase extends AppCompatActivity {
         }
 
         //Opens a new character notes fragment with previously entered notes loaded in
+        findViewById(R.id.character_fragment_id).setVisibility(View.VISIBLE);
         Bundle bundle = new Bundle();
         bundle.putString("charKey",textView.getText().toString());
         bundle.putString("storyKey",StoryName);
