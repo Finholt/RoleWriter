@@ -37,12 +37,7 @@ import java.util.List;
 
 public class StoryBase extends AppCompatActivity {
 
-
     DBHandler appDB;
-    String[] stories;
-    Button saveBtn;
-    EditText storyTitle;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +51,7 @@ public class StoryBase extends AppCompatActivity {
         String defaultTimeEntry = "true";
         String firstTime = sharePref.getString(getString(R.string.first_time_key),defaultTimeEntry);
 
+        //Populates Database with some example stories if this is the first time the app is launched
         if(firstTime.equalsIgnoreCase("true")){
 
             appDB.addStory(new StoryClass("Harry Potter","[2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1]","Young Adult","Fiction","MAGIC ALL DAY ERR DAY",""));
@@ -66,8 +62,8 @@ public class StoryBase extends AppCompatActivity {
             editor.commit();
         }
 
+        //Creates the fragment used to create/edit stories and hides it
         findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
-
         if (findViewById(R.id.story_fragment_id) != null) {
             Bundle bundle = new Bundle();
             bundle.putString("titleKey", "");
@@ -77,8 +73,8 @@ public class StoryBase extends AppCompatActivity {
                     .add(R.id.story_fragment_id, storyFragment).commit();
         }
 
+        //Populates the ListView of stories
         findViewById(R.id.story_list_id).setVisibility(View.VISIBLE);
-
         if (findViewById(R.id.story_list_id) != null) {
             Bundle bundle = new Bundle();
             bundle.putString("titleKey", "");
@@ -88,52 +84,10 @@ public class StoryBase extends AppCompatActivity {
         }
     }
 
-    private void registerClickCallback() {
-        ListView list = (ListView) findViewById(R.id.storyList);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-
-                if (findViewById(R.id.story_fragment_id).getVisibility() == View.INVISIBLE) {
-                    findViewById(R.id.story_fragment_id).setVisibility(View.VISIBLE);
-                }
-
-                TextView textView = (TextView) viewClicked;
-
-                String ageG = "2131492993";
-                String classi = "2131492998";
-                String genre = "";
-
-                List<StoryClass> storyList = appDB.getAllStories();
-                for (StoryClass s : storyList) {
-                    String storyT = s.getTitle();
-                    if (textView.getText().toString().equalsIgnoreCase(storyT)) {
-                        ageG = s.getAge();
-                        classi = s.getClassi();
-                        genre = s.getGenre();
-                    }
-                }
-
-                if (findViewById(R.id.story_fragment_id) != null) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("titleKey", textView.getText().toString());
-                    bundle.putString("ageKey", ageG);
-                    bundle.putString("classiKey", classi);
-                    bundle.putString("genreKey", genre);
-                    StoryFragmentOne oldFrag = new StoryFragmentOne();
-                    oldFrag.setArguments(bundle);
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.story_fragment_id, oldFrag).commit();
-                }
-            }
-        });
-    }
-
     public void onClick(View v)
     {   //add button makes story fragment appear to edit the details about the story
         switch (v.getId()) {
             case R.id.AddButton:
-
                 if (findViewById(R.id.story_fragment_id) != null) {
                     Bundle bundle = new Bundle();
                     bundle.putString("titleKey","");
@@ -183,6 +137,7 @@ public class StoryBase extends AppCompatActivity {
     }
 
     public void OpenCharacters(View view) {
+        //Opens the character page and passes in the story that was selected
         TextView text = (TextView) view;
         Intent intent = new Intent(this, CharacterBase.class);
 
@@ -193,8 +148,6 @@ public class StoryBase extends AppCompatActivity {
     public void EditStory(View view) {
         RelativeLayout relLay = (RelativeLayout) view.getParent();
         TextView textView = (TextView) relLay.findViewById(R.id.story_name);
-        //Toast.makeText(getApplicationContext(), textView.getText().toString(),
-        //        Toast.LENGTH_LONG).show();
 
         if (findViewById(R.id.story_fragment_id).getVisibility() == View.INVISIBLE) {
             findViewById(R.id.story_fragment_id).setVisibility(View.VISIBLE);
@@ -205,6 +158,7 @@ public class StoryBase extends AppCompatActivity {
         String genre = "";
         String summary = "";
 
+        //Gets the information for the selected story from database
         List<StoryClass> storyList = appDB.getAllStories();
         for (StoryClass s : storyList) {
             String storyT = s.getTitle();
@@ -216,6 +170,7 @@ public class StoryBase extends AppCompatActivity {
             }
         }
 
+        //Opens the story editing fragment for the selected story
         if (findViewById(R.id.story_fragment_id) != null) {
             Bundle bundle = new Bundle();
             bundle.putString("titleKey", textView.getText().toString());
@@ -234,10 +189,12 @@ public class StoryBase extends AppCompatActivity {
         RelativeLayout relLay = (RelativeLayout) view.getParent();
         final TextView textView = (TextView) relLay.findViewById(R.id.story_name);
 
+        //Manages dialog popup for deletion confirmation
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
+                    //Deletes the story
                     case DialogInterface.BUTTON_POSITIVE:
                         List<StoryClass> storyList = appDB.getAllStories();
                         for (StoryClass s : storyList) {
@@ -248,6 +205,7 @@ public class StoryBase extends AppCompatActivity {
                             }
                         }
 
+                        //Refreshes the ListView
                         if (findViewById(R.id.story_list_id) != null) {
                             Bundle bundle = new Bundle();
                             bundle.putString("titleKey", "");
@@ -279,6 +237,7 @@ public class StoryBase extends AppCompatActivity {
 
         String notes = "";
 
+        //Loads story notes from database
         List<StoryClass> storyList = appDB.getAllStories();
         for (StoryClass s : storyList) {
             String storyT = s.getTitle();
@@ -287,6 +246,7 @@ public class StoryBase extends AppCompatActivity {
             }
         }
 
+        //Opens a new story notes fragment with previously entered notes loaded in
         if (findViewById(R.id.story_fragment_id) != null) {
             Bundle bundle = new Bundle();
             bundle.putString("titleKey", textView.getText().toString());

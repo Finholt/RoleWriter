@@ -26,26 +26,16 @@ public class CharacterBase extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_base);
 
+        //Gets the story name passed from the previous activity
         Intent PassedValues = getIntent();
         StoryName = PassedValues.getStringExtra("StoryName");
 
+        //Sets the "help" text to the story title for reference
         TextView storyTitle = (TextView) findViewById(R.id.newStory);
         storyTitle.setText(StoryName);
 
-        /*findViewById(R.id.character_fragment_id).setVisibility(View.INVISIBLE);
-
-        if (findViewById(R.id.character_fragment_id) != null) {
-            Bundle bundle = new Bundle();
-            bundle.putString("titleKey","");
-            bundle.putString("storyKey",StoryName);
-            CharFragmentOne charFragmentOne = new CharFragmentOne();
-            charFragmentOne.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.character_fragment_id, charFragmentOne).commit();
-        }*/
-
+        //Creates the ListView by creating a ListFragment
         findViewById(R.id.character_list_id).setVisibility(View.VISIBLE);
-
         if (findViewById(R.id.character_list_id) != null) {
             Bundle bundle = new Bundle();
             bundle.putString("charKey", "");
@@ -54,32 +44,12 @@ public class CharacterBase extends AppCompatActivity {
             characterListFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().add(R.id.character_list_id, characterListFragment).commit();
         }
-
-        //findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
-        //populateListView();
-    }
-    private void populateListView() {
-
-        //List<StoryClass> storyList = appDB.getAllStories();
-        //int storyCount = appDB.getStoryCount();
-        //String[] characters = {"Harry", "Ron", "Hermione"};
-        //stories = new String[storyCount];
-
-        /*int i = 0;
-        for (StoryClass s : storyList){
-            stories[i] = s.getTitle();
-            i++;
-        }*/
-
-        //ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.story_items, characters);
-
-        //ListView list = (ListView) findViewById(R.id.storyList);
-        //list.setAdapter(adapter);
     }
 
     public void onClick(View v)
     {
         switch (v.getId()) {
+            //Creates a new empty character fragment to add a new character
             case R.id.AddButton:
                 Bundle bundle = new Bundle();
                 bundle.putString("charKey","");
@@ -92,6 +62,7 @@ public class CharacterBase extends AppCompatActivity {
         }
     }
 
+    //Passes character information into the fragment to edit an existing character
     public void EditCharacter(View view) {
         RelativeLayout relLay = (RelativeLayout) view.getParent();
         TextView textView = (TextView) relLay.findViewById(R.id.character_name);
@@ -133,6 +104,7 @@ public class CharacterBase extends AppCompatActivity {
             }
         }
 
+        //Refreshes the ListView
         if (findViewById(R.id.character_fragment_id) != null) {
             Bundle bundle = new Bundle();
             CharFragmentOne oldFrag = new CharFragmentOne();
@@ -159,11 +131,13 @@ public class CharacterBase extends AppCompatActivity {
         RelativeLayout relLay = (RelativeLayout) view.getParent();
         final TextView textView = (TextView) relLay.findViewById(R.id.character_name);
 
+        //Manages dialog popup for deletion confirmation
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
+                        //Deletes the character
                         List<CharacterClass> charList = appDB.getAllChars(StoryName);
                         for (CharacterClass c : charList) {
                             String charN = c.getCharName();
@@ -171,6 +145,8 @@ public class CharacterBase extends AppCompatActivity {
                                 appDB.deleteChar(c);
                             }
                         }
+
+                        //Refreshes the ListView
                         if (findViewById(R.id.character_list_id) != null) {
                             Bundle bundle = new Bundle();
                             bundle.putString("charKey", "");
@@ -200,6 +176,7 @@ public class CharacterBase extends AppCompatActivity {
             findViewById(R.id.character_fragment_id).setVisibility(View.VISIBLE);
         }
 
+        //Loads character notes from database
         String notes = "";
         List<CharacterClass> charList = appDB.getAllChars(StoryName);
         for (CharacterClass c : charList) {
@@ -209,6 +186,7 @@ public class CharacterBase extends AppCompatActivity {
             }
         }
 
+        //Opens a new character notes fragment with previously entered notes loaded in
         Bundle bundle = new Bundle();
         bundle.putString("charKey",textView.getText().toString());
         bundle.putString("storyKey",StoryName);

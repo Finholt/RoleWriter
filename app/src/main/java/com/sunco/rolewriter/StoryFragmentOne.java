@@ -114,8 +114,8 @@ public class StoryFragmentOne extends Fragment {
             });
         }
 
+        //Deletes chosen story
         ImageView delStory = (ImageView) storyview.findViewById(R.id.erase_button);
-
         delStory.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -351,11 +351,6 @@ public class StoryFragmentOne extends Fragment {
                     getFragmentManager().beginTransaction().replace(R.id.story_fragment_id, storyNotesFragment)
                             .addToBackStack(null)
                             .commit();
-
-                    //populateListView(listFrag);
-                    //baseview.findViewById(R.id.story_list_id).setVisibility(View.VISIBLE);
-                    //getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
-
                 }
             });
 
@@ -397,11 +392,6 @@ public class StoryFragmentOne extends Fragment {
                     getFragmentManager().beginTransaction().replace(R.id.story_fragment_id, storyNotesFragment)
                             .addToBackStack(null)
                             .commit();
-
-                    //populateListView(listFrag);
-                    //baseview.findViewById(R.id.story_list_id).setVisibility(View.VISIBLE);
-                    //getActivity().findViewById(R.id.story_fragment_id).setVisibility(View.INVISIBLE);
-
                 }
             });
         }
@@ -427,7 +417,7 @@ public class StoryFragmentOne extends Fragment {
     }
 
     private void populateListView(View listFrag) {
-
+        //Generates/refreshes Story ListView
         if (listFrag != null) {
             Bundle bundle = new Bundle();
             bundle.putString("titleKey", "");

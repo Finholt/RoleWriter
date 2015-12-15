@@ -1,8 +1,7 @@
 package com.sunco.rolewriter;
+//
 
-/**
- * Created by Connor on 12/13/2015.
- */
+//Not actually called from anywhere, but we kept it as a good thing to have were we to develop the code further
 public class CharacterItems {
 
     private String characterName;

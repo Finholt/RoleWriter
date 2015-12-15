@@ -54,6 +54,7 @@ public class CharNotesFragment extends Fragment {
             }
         });
 
+        //Deletes the selected character
         ImageView delChar = (ImageView) charview.findViewById(R.id.erase_button);
         delChar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -123,7 +124,7 @@ public class CharNotesFragment extends Fragment {
     }
 
     private void populateListView(View listFrag) {
-
+        //Generates/Refreshes the Character ListView
         String storyName = getArguments().getString("storyKey");
         if (listFrag != null) {
             Bundle bundle = new Bundle();

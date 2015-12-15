@@ -85,7 +85,7 @@ public class CharFragmentOne extends Fragment{
             }
         });
 
-
+        //Deleting the selected character
         ImageView delChar = (ImageView) charview.findViewById(R.id.erase_button);
         final FrameLayout listFrag = (FrameLayout) getActivity().findViewById(R.id.character_fragment_id);
         delChar.setOnClickListener(new View.OnClickListener() {
@@ -231,15 +231,6 @@ public class CharFragmentOne extends Fragment{
             // done adding new char.
         }
         else{
-            /*String cAge = getArguments().getString("ageKey");
-            String cLoc = getArguments().getString("locKey");
-            String cOcc = getArguments().getString("occKey");
-            String cHeight = getArguments().getString("heightKey");
-            String cWeight = getArguments().getString("weightKey");
-            String cEyeC = getArguments().getString("eyeKey");
-            String cHairc = getArguments().getString("hairKey");
-            String cNation = getArguments().getString("nationKey");*/
-
             charName.setText(getArguments().getString("charKey"));
             age.setText(getArguments().getString("ageKey"));
             loc.setText(getArguments().getString("locKey"));
@@ -401,8 +392,6 @@ public class CharFragmentOne extends Fragment{
         direction = (RadioGroup) getView().findViewById(R.id.direction_radio_group);
         int selectedDir = direction.getCheckedRadioButtonId();
         RadioButton dirBtn = (RadioButton) getView().findViewById(selectedDir);
-        //String ageStr = ageBtn.getText().toString();
-        //return ageStr;
         return String.valueOf(dirBtn.getId());
     }
 
@@ -410,8 +399,6 @@ public class CharFragmentOne extends Fragment{
         gender = (RadioGroup) getView().findViewById(R.id.gender_radio_group);
         int selected = gender.getCheckedRadioButtonId();
         RadioButton btn = (RadioButton) getView().findViewById(selected);
-        //String ageStr = ageBtn.getText().toString();
-        //return ageStr;
         return String.valueOf(btn.getId());
     }
 
@@ -419,13 +406,11 @@ public class CharFragmentOne extends Fragment{
         income = (RadioGroup) getView().findViewById(R.id.income_radio_group);
         int selected = income.getCheckedRadioButtonId();
         RadioButton btn = (RadioButton) getView().findViewById(selected);
-        //String ageStr = ageBtn.getText().toString();
-        //return ageStr;
         return String.valueOf(btn.getId());
     }
 
     private void populateListView(View listFrag) {
-
+        //Creates/refreshes the Character ListView
         String storyName = getArguments().getString("storyKey");
         if (listFrag != null) {
             Bundle bundle = new Bundle();

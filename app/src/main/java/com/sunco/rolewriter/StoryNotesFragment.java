@@ -51,6 +51,7 @@ public class StoryNotesFragment extends Fragment {
 
         ImageView delStory = (ImageView) storyview.findViewById(R.id.erase_button);
 
+        //Deletes selected story
         delStory.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -122,7 +123,7 @@ public class StoryNotesFragment extends Fragment {
         return storyview;
     }
     private void populateListView(View listFrag) {
-
+        //Generates/Refreshes story ListView
         if (listFrag != null) {
             Bundle bundle = new Bundle();
             bundle.putString("titleKey", "");
