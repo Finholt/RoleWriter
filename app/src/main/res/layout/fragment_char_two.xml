@@ -446,7 +446,9 @@
             android:layout_marginBottom="60dp"
             android:layout_marginTop="60dp"
             android:text="@string/save_and_continue_text"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+            android:layout_centerHorizontal="true"
+            android:background="@null"
+            android:textColor="#0085A7"/>
 
     </RelativeLayout>
 </ScrollView>

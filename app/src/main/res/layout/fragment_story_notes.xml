@@ -92,6 +92,8 @@
             android:layout_height="wrap_content"
             android:text="@string/save_and_finish_text"
             android:gravity="center"
+            android:background="@null"
+            android:textColor="#0085A7"
             android:layout_marginTop="520dp"
             android:layout_marginBottom="40dp"
             android:layout_centerHorizontal="true"
