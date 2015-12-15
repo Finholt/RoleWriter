@@ -1,11 +1,14 @@
 package com.sunco.rolewriter;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.MediaStore;
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -98,7 +102,7 @@ public class StoryBase extends AppCompatActivity {
 
                 String ageG = "2131492993";
                 String classi = "2131492998";
-                String genre ="";
+                String genre = "";
 
                 List<StoryClass> storyList = appDB.getAllStories();
                 for (StoryClass s : storyList) {
@@ -224,5 +228,44 @@ public class StoryBase extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.story_fragment_id, oldFrag).commit();
         }
+    }
+
+    public void DelStory(View view) {
+        RelativeLayout relLay = (RelativeLayout) view.getParent();
+        final TextView textView = (TextView) relLay.findViewById(R.id.story_name);
+
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        List<StoryClass> storyList = appDB.getAllStories();
+                        for (StoryClass s : storyList) {
+                            String storyT = s.getTitle();
+                            String delTitle = textView.getText().toString();
+                            if (delTitle.equalsIgnoreCase(storyT)) {
+                                appDB.deleteStory(s);
+                            }
+                        }
+
+                        if (findViewById(R.id.story_list_id) != null) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("titleKey", "");
+                            StoryList storyListFragment = new StoryList();
+                            storyListFragment.setArguments(bundle);
+                            getSupportFragmentManager().beginTransaction().replace(R.id.story_list_id, storyListFragment).commit();
+                        }
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            }
+        };
+
+        // Confirmation prompt
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to delete this story?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
     }
 }

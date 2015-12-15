@@ -54,7 +54,7 @@ public class StoryFragmentOne extends Fragment {
         storyTitle = (EditText) storyview.findViewById(R.id.new_title_edit_text);
         ageGroup = (RadioGroup) storyview.findViewById(R.id.age_radio_group);
         classiGroup = (RadioGroup) storyview.findViewById(R.id.classification_radio_group);
-        listFrag = (FrameLayout) baseview.findViewById(R.id.story_fragment_id);
+        listFrag = (FrameLayout) baseview.findViewById(R.id.story_list_id);
         summary = (EditText) storyview.findViewById(R.id.synopsis_edit_text);
 
         final TextView[] genreIcons = {(TextView) storyview.findViewById(R.id.action_button),
